@@ -45,7 +45,7 @@ int ConsoleUI::respondToMessage() {
 
     try {
         // Handle all available commands and throw error on unknown ones
-        if(userRequest.find("add") != std::string::npos) {
+        if(userRequest.find("add") != std::string::npos) { //baeta við hvort vid viljum adda scientist eda computer
             clear();
             Scientist additionalScientist = Scientist();
             std::cout << "Enter the name of the scientist: ";
@@ -62,6 +62,9 @@ int ConsoleUI::respondToMessage() {
             std::cin >> additionalScientist.gender;
             scienceService.addScientist(additionalScientist);
             clear();
+            std::cout << "Enter computer(s) that the scientist has worked on: ";
+            std::cin >> additionalScientist.computers;
+            scienceService.addScientist(additionalScientist);
         } else if(userRequest.find("search") != std::string::npos) {
             clear();
             std::string searchTerm = "";
