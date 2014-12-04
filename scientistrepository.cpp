@@ -25,6 +25,7 @@ ScientistRepository::ScientistRepository(std::string fname) {
             scientist.dateOfBirth = fields.at(1);
             scientist.dateOfDeath = fields.at(2);
             scientist.gender = fields.at(3);
+            scientist.computers = fields.at(4);
             scientistList.push_back(scientist);
         }
         scientistFile.close();

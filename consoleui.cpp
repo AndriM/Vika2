@@ -74,7 +74,7 @@ int ConsoleUI::respondToMessage() {
             Scientist* searchResult = scienceService.search(searchTerm);
             if(searchResult) {
                 std::cout << "Scientist found!!" << std::endl;
-                std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\tComputers:\n";
+                std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\t\tComputers:\n";
                 std::cout << searchResult->name << "\t" << searchResult->dateOfBirth << "\t\t" << searchResult->dateOfDeath << "\t\t" << searchResult->gender << "\t\t" << searchResult->computers << "\t\t" << std::endl;
             } else {
                 std::cout << "No results found for the term: " << searchTerm << std::endl;
@@ -89,7 +89,7 @@ int ConsoleUI::respondToMessage() {
             std::cin >> filterCol >> filterMod;
             clear();
             std::list<Scientist> l = scienceService.getScientistsOrderedBy(filterCol,filterMod);
-            std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\tComputers:\n";
+            std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\tComputers:\n"; //skoda tab
             for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                 std::cout << iter->name << "\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender <<  "\t\t" << iter->computers << std::endl;
             }
