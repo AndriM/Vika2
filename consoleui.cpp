@@ -133,10 +133,10 @@ int ConsoleUI::respondToMessage() {
             std::cin >> additionalComputer.constructionYear;
             clear();
             std::cout << "Enter the type of the computer: ";
-            std::cin >> additionalScientist.type;
+            std::cin >> additionalComputer.type;
             clear();
             std::cout << "Was the computer constructed (Yes/No): ";
-            std::cin >> additionalScientist.constructed;
+            std::cin >> additionalComputer.constructed;
             clear();
             computerService.addComputer(additionalComputer);
         } else if(userRequest.find("search") != std::string::npos) {

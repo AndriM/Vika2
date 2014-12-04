@@ -15,6 +15,7 @@ public:
     int start();
 private:
     ScienceService scienceService;
+    ComputerService computerService;
     void clear();
     void waitForPrompt();
     int respondToMessage();
