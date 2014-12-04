@@ -71,7 +71,7 @@ void ScientistRepository::save() {
     }
 
     for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++) {
-        scientistFile << (*iter).name << delimiter << (*iter).dateOfBirth << delimiter << (*iter).dateOfDeath << delimiter << (*iter).gender << std::endl;
+        scientistFile << (*iter).name << delimiter << (*iter).dateOfBirth << delimiter << (*iter).dateOfDeath << delimiter << (*iter).gender << delimiter << (*iter).computers << std::endl;
     }
     scientistFile.flush();
     scientistFile.close();
