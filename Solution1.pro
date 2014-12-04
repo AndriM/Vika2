@@ -23,7 +23,9 @@ SOURCES += main.cpp \
     scientistrepository.cpp \
     utilities.cpp \
     computer.cpp \
-    sql.cpp
+    sql.cpp \
+    computerservice.cpp \
+    computerrepository.cpp
 
 HEADERS += \
     comparer.h \
@@ -34,4 +36,6 @@ HEADERS += \
     scientistrepository.h \
     utilities.h \
     computer.h \
-    sql.h
+    sql.h \
+    computerservice.h \
+    computerrepository.h
