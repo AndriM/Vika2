@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core
+QT       += core sql
 
 QT       -= gui
 
@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     scientist.cpp \
     scientistrepository.cpp \
     utilities.cpp \
-    computer.cpp
+    computer.cpp \
+    sql.cpp
 
 HEADERS += \
     comparer.h \
@@ -32,4 +33,5 @@ HEADERS += \
     scientist.h \
     scientistrepository.h \
     utilities.h \
-    computer.h
+    computer.h \
+    sql.h
