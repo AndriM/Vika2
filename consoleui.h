@@ -6,6 +6,7 @@
 #include <stack>
 #include <list>
 #include "scienceservice.h"
+#include "computerservice.h"
 
 // Display layer for the console application
 class ConsoleUI {
