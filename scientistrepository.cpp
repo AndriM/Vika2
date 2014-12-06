@@ -36,8 +36,8 @@ ScientistRepository::~ScientistRepository() {
 }
 
 void ScientistRepository::add(Scientist scientist) {
+    openDatabase();
     QSqlQuery query;
-
     query.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear, Computers)"
                   "VALUES(:name, :dateOfBirth, :dateOfDeath, :gender, :computers)");
     query.bindValue(":name",        QString::fromStdString(scientist.name));
@@ -91,6 +91,8 @@ void ScientistRepository::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "science_db.sqlite";
     db.setDatabaseName(dbName);
+    bool db_ok = db.open();
+
 }
 std::list<Scientist> ScientistRepository::deepCopy() {
     std::list<Scientist> outList = std::list<Scientist>();
