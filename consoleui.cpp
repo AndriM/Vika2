@@ -108,7 +108,8 @@ int ConsoleUI::respondToMessage() {
         } else {
             throw std::runtime_error( userRequest + " is not a valid command.");
         }
-    } catch(std::runtime_error e) {
+        }
+       catch(std::runtime_error e) {
         clear();
         std::cout << "Command caused an error: " << e.what() << std::endl;
         std::cout << "Please try another command" << std::endl;
@@ -116,7 +117,7 @@ int ConsoleUI::respondToMessage() {
         clear();
     }
     }
-    if(answer == 2){ //tarf ad breyta ollu herna ur scientist i computer
+    /*if(answer == 2){ //tarf ad breyta ollu herna ur scientist i computer
         std::cout << MAIN_MENU << std::endl;
         std::string userRequest;
         std::cin >> userRequest;
@@ -170,20 +171,19 @@ int ConsoleUI::respondToMessage() {
             }
             waitForPrompt();
             clear();
-        } else if (userRequest.find("exit") != std::string::npos) {
+         else if (userRequest.find("exit") != std::string::npos) {
             return 0;
         } else {
             throw std::runtime_error( userRequest + " is not a valid command.");
-        }
-    } catch(std::runtime_error e) {
+    }
+    catch(std::runtime_error e) {
         clear();
         std::cout << "Command caused an error: " << e.what() << std::endl;
         std::cout << "Please try another command" << std::endl;
         waitForPrompt();
         clear();
     }
-    }
+    return 1;*/
 
-    return 1;
+    return 0;
 }
-

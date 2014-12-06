@@ -5,5 +5,5 @@ computer::computer()
     name = "";
     constructionYear = "";
     type = "";
-    constructed = false;
+    constructed = "";
 }

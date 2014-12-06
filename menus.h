@@ -15,7 +15,9 @@ along with an ascending(asc) or descending(desc) modifier\n\
         dob     : Date of birth\n\
         dod     : Date of death\n\
         gender  : Gender\n\n\
-Example: \"name desc\"";
+        Example: \"name desc\"";
+
+//std::string FILTER_MENU2 = tarf ad bua til fyrir computer
 
 
 #endif // MENUS_H

@@ -1,4 +1,4 @@
-#include "computerservice.h"
+/*#include "computerservice.h"
 
 
 ComputerService::~ComputerService()
@@ -19,4 +19,4 @@ std::list<computer> ComputerService::getComputersOrderedBy(std::string col, std:
 
 computer* ComputerService::search(std::string searchTerm) {
     return computerRepository.search(searchTerm);
-}
+}*/

@@ -3,7 +3,7 @@
 /*    string name;
     string constructionYear;
     string type;
-    bool constructed;*/
+    bool constructed;
 
 ComputerRepository::ComputerRepository(std::string fname) {
     filename = fname;
@@ -118,3 +118,4 @@ computer* ComputerRepository::search(std::string searchTerm) {
     }
     return NULL;
 }
+*/
