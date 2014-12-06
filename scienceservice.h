@@ -5,7 +5,6 @@
 #include "ScientistRepository.h"
 #include <list>
 
-
 // Domain layer, services the presentation layer
 class ScienceService {
 public:

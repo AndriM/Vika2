@@ -85,7 +85,13 @@ std::list<Scientist> ScientistRepository::list(std::string col, std::string mod)
     outList.sort(comp);
     return outList;
 }
-
+void ScientistRepository::openDatabase()
+{
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "science_db.sqlite";
+    db.setDatabaseName(dbName);
+}
 std::list<Scientist> ScientistRepository::deepCopy() {
     std::list<Scientist> outList = std::list<Scientist>();
     for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++) {
