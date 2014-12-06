@@ -39,15 +39,43 @@ ComputerRepository::~ComputerRepository() {
 }
 
 void ComputerRepository::add(computer cpu) {
-    // Replace our chosen delimiter with space to avoid breaking the delimited format of the file
-    std::replace(cpu.name.begin(),cpu.name.end(),delimiter,' ');
-    computerList.push_back(cpu);
-    save();
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO computers (Name, Construction Year, Type, Constructed)"
+                  "VALUES(:name, :constructionYear, :type, :constructed)");
+    query.bindValue(":name",             QString::fromStdString(cpu.name));
+    query.bindValue(":constructionYear", QString::fromStdString(cpu.constructionYear));
+    query.bindValue(":type",             QString::fromStdString(cpu.type));
+    query.bindValue(":constructed",      QString::fromStdString(cpu.constructed));
+
+    query.exec();
+//    Replace our chosen delimiter with space to avoid breaking the delimited format of the file
+//    std::replace(cpu.name.begin(),cpu.name.end(),delimiter,' ');
+//    computerList.push_back(cpu);
+//    save();
 }
 
 
 std::list<computer> ComputerRepository::list() {
-    return deepCopy();
+    std::list<computer> computers = std::list<computer>();
+
+    QSqlQuery query;
+    query.exec("SELECT * FROM computers");
+
+    query.exec("SELECT s.Name, j.s_ID AS 'ScientistID', j.c_ID AS 'ComputerID, FROM computers"
+               "INNER JOIN Joined j"
+               "ON j.s_ID = s.ID");
+    while(query.next()){
+        computer cpu = computer();
+        cpu.name = query.value("Name").toString().toStdString();
+        cpu.constructionYear = query.value("ConstructionYear").toString().toStdString();
+        cpu.type = query.value("Type").toString().toStdString();
+        cpu.constructed = query.value("Constructed").toString().toStdString();
+
+        computers.push_back(cpu);
+
+    }
+    return computers;
 }
 
 std::list<computer> ComputerRepository::list(std::string col, std::string mod) {

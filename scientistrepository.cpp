@@ -36,15 +36,46 @@ ScientistRepository::~ScientistRepository() {
 }
 
 void ScientistRepository::add(Scientist scientist) {
-    // Replace our chosen delimiter with space to avoid breaking the delimited format of the file
-    std::replace(scientist.name.begin(),scientist.name.end(),delimiter,' ');
-    scientistList.push_back(scientist);
-    save();
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear, Computers)"
+                  "VALUES(:name, :dateOfBirth, :dateOfDeath, :gender, :computers)");
+    query.bindValue(":name",        QString::fromStdString(scientist.name));
+    query.bindValue(":dateOfBirth", QString::fromStdString(scientist.dateOfBirth));
+    query.bindValue(":dateOfDeath", QString::fromStdString(scientist.dateOfDeath));
+    query.bindValue(":gender",      QString::fromStdString(scientist.gender));
+    query.bindValue(":computers",   QString::fromStdString(scientist.computers));
+
+    query.exec();
+//     Replace our chosen delimiter with space to avoid breaking the delimited format of the file
+//    std::replace(scientist.name.begin(),scientist.name.end(),delimiter,' ');
+//    scientistList.push_back(scientist);
+//    save();
 }
 
 
 std::list<Scientist> ScientistRepository::list() {
-    return deepCopy();
+    std::list<Scientist> scientist = std::list<Scientist>();
+
+
+    QSqlQuery query;
+    query.exec("SELECT * FROM scientists");
+
+    query.exec("SELECT c.Name, j.c_ID AS 'ComputerID', j.s_ID AS 'ScientistID, FROM computers"
+               "INNER JOIN Joined j"
+               "ON j.c_ID = c.ID");
+    while(query.next()){
+        Scientist s = Scientist();
+        s.name = query.value("Name").toString().toStdString();
+        s.gender = query.value("Gender").toString().toStdString();
+        s.dateOfBirth = query.value("BirthYear").toString().toStdString();
+        s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+        s.computers = query.value("Computers").toString().toStdString();
+
+        scientist.push_back(s);
+
+    }
+    return scientist;
 }
 
 std::list<Scientist> ScientistRepository::list(std::string col, std::string mod) {

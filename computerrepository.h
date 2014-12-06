@@ -10,6 +10,8 @@
 #include <vector>
 #include "comparer.h"
 #include <algorithm>
+#include <QtSql>
+#include "sql.h"
 
 
 class ComputerRepository
@@ -22,10 +24,8 @@ public:
     void add(computer);//
     std::list<computer> list();//
     std::list<computer> list(std::string col, std::string mod);//
-
-
 private:
-
+    QSqlDatabase db;
     std::list<computer> computerList;
     std::string filename;
     std::list<computer> deepCopy();

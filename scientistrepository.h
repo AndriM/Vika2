@@ -10,6 +10,7 @@
 #include <vector>
 #include "comparer.h"
 #include <algorithm>
+#include <QtSql>
 
 // Handles all the things that pertain to persistence
 // uses a file that is located in the build root directory
