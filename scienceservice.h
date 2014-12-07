@@ -2,7 +2,9 @@
 #define SCIENCESERVICE_H
 
 #include "Scientist.h"
+#include "computer.h"
 #include "ScientistRepository.h"
+#include "computerrepository.h"
 #include <list>
 
 // Domain layer, services the presentation layer
@@ -15,8 +17,10 @@ public:
     Scientist* search(std::string searchTerm);
     std::list<Scientist> getAllScientists();
     std::list<Scientist> getScientistsOrderedBy(std::string,std::string);
+    void addComputer(computer comp);
 private:
     ScientistRepository scientistRepository;
+    ComputerRepository computerRepository;
 };
 
 #endif // SCIENCESERVICE_H

@@ -51,7 +51,7 @@ int ConsoleUI::respondToMessage() {
         std::cout << MAIN_MENU << std::endl;
         std::string userRequest;
         std::cin >> userRequest;
-    try {
+    //try {
         // Handle all available commands and throw error on unknown ones
         if(userRequest.find("add") != std::string::npos) { //baeta við hvort vid viljum adda scientist eda computer
             clear();
@@ -120,19 +120,19 @@ int ConsoleUI::respondToMessage() {
             throw std::runtime_error( userRequest + " is not a valid command.");
         }
         }
-       catch(std::runtime_error e) {
+       /*catch(std::runtime_error e) {
         clear();
         std::cout << "Command caused an error: " << e.what() << std::endl;
         std::cout << "Please try another command" << std::endl;
         waitForPrompt();
         clear();
-    }
-    }
-    /*if(answer == 2){ //tarf ad breyta ollu herna ur scientist i computer
+    }*/
+
+    if(answer == 2){ //tarf ad breyta ollu herna ur scientist i computer
         std::cout << MAIN_MENU << std::endl;
         std::string userRequest;
         std::cin >> userRequest;
-    try {
+    //try {
         // Handle all available commands and throw error on unknown ones
         if(userRequest.find("add") != std::string::npos) { //baeta við hvort vid viljum adda scientist eda computer
             clear();
@@ -150,8 +150,8 @@ int ConsoleUI::respondToMessage() {
             std::cout << "Was the computer constructed (Yes/No): ";
             std::cin >> additionalComputer.constructed;
             clear();
-            computerService.addComputer(additionalComputer);
-        } else if(userRequest.find("search") != std::string::npos) {
+            scienceService.addComputer(additionalComputer);}
+        /*} else if(userRequest.find("search") != std::string::npos) {
             clear();
             std::string searchTerm = "";
             std::cout << "Enter the search term: ";
@@ -194,7 +194,8 @@ int ConsoleUI::respondToMessage() {
         waitForPrompt();
         clear();
     }
-    return 1;*/
-
+    return 1;
+        }*/
+}
     return 0;
 }

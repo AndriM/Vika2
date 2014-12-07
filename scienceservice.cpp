@@ -10,6 +10,9 @@ ScienceService::~ScienceService() {
 void ScienceService::addScientist(Scientist scientist) {
     scientistRepository.add(scientist);
 }
+void ScienceService::addComputer(computer comp) {
+    computerRepository.add(comp);
+}
 
 std::list<Scientist> ScienceService::getAllScientists() {
     std::list<Scientist> l = scientistRepository.list();
