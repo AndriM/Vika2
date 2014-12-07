@@ -18,6 +18,8 @@ public:
     std::list<Scientist> getAllScientists();
     std::list<Scientist> getScientistsOrderedBy(std::string,std::string);
     void addComputer(computer comp);
+    std::list<computer> orderComputers(std::string orderby);
+    std::list<Scientist> orderScientists(std::string orderby);
 private:
     ScientistRepository scientistRepository;
     ComputerRepository computerRepository;

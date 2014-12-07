@@ -92,7 +92,19 @@ int ConsoleUI::respondToMessage() {
             clear();
         } else if(userRequest.find("order") != std::string::npos) {
             clear();
-            std::string filterCol = "";
+            std::string orderby;
+            std::list<Scientist> l;
+            std::cout << FILTER_MENU << std::endl;
+            cin >> orderby;
+            l = scienceService.orderScientists(orderby);
+
+            std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
+
+            for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
+                std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
+            }
+
+            /*std::string filterCol = "";
             std::string filterMod = "";
             std::cout << FILTER_MENU << std::endl;
             std::cin >> filterCol >> filterMod;
@@ -102,8 +114,7 @@ int ConsoleUI::respondToMessage() {
             for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                 std::cout << iter->name << "\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
             }
-            waitForPrompt();
-            clear();
+            waitForPrompt();*/
         }else if(userRequest.find("display") != std::string::npos)
         {
             std::list<Scientist> s = scienceService.getAllScientists();
@@ -153,10 +164,7 @@ int ConsoleUI::respondToMessage() {
             std::cin >> additionalComputer.constructed;
             clear();
             scienceService.addComputer(additionalComputer);}
-    }
-        std::cout << "Do you want to go again (y/n): ";
-        std::cin >> wantToGoAgain;
-    }while(wantToGoAgain == 'Y' || wantToGoAgain =='y');
+
         /*} else if(userRequest.find("search") != std::string::npos) {
             clear();
             std::string searchTerm = "";
@@ -174,21 +182,24 @@ int ConsoleUI::respondToMessage() {
             }
             waitForPrompt();
             clear();
-        } else if(userRequest.find("order") != std::string::npos) {
+        }*/
+            if(userRequest.find("order") != std::string::npos) {
             clear();
-            std::string filterCol = "";
-            std::string filterMod = "";
+
+            std::string orderby;
+            std::list<computer> l;
             std::cout << FILTER_MENU2 << std::endl;
-            std::cin >> filterCol >> filterMod;
-            clear();
-            std::list<computer> l = computerService.getComputersOrderedBy(filterCol,filterMod);
-            std::cout << "Name:\t\tYear of construction:\tType:\tComputer constructed:\n";
+            cin >> orderby;
+            l = scienceService.orderComputers(orderby);
+
+            std::cout << "Name:\t\tConstruction Year:\tType:\tComputer constructed:\n";
+
             for(std::list<computer>::iterator iter = l.begin(); iter != l.end(); iter ++) {
-                std::cout << iter->name << "\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
+                std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
             }
-            waitForPrompt();
-            clear();
-         else if (userRequest.find("exit") != std::string::npos) {
+
+
+         /*else if (userRequest.find("exit") != std::string::npos) {
             return 0;
         } else {
             throw std::runtime_error( userRequest + " is not a valid command.");
@@ -203,5 +214,9 @@ int ConsoleUI::respondToMessage() {
     return 1;
         }*/
 //}
+    }
+    }std::cout << "Do you want to go again (y/n): ";
+    std::cin >> wantToGoAgain;
+}while(wantToGoAgain == 'Y' || wantToGoAgain =='y');
     return 0;
 }

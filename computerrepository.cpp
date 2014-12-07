@@ -37,11 +37,11 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
     computer c = computer();
     if(order == "name")
     {
-        query.exec("SELECT * FROM scientists ORDER BY Name");
+        query.exec("SELECT * FROM Computers ORDER BY Name");
 
         while(query.next()){ //fer aldrei herna inn!
             c.name = query.value("Name").toString().toStdString();
-            c.constructionYear = query.value("ConstructionYear").toString().toStdString();
+            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
             c.constructed = query.value("Constructed").toString().toStdString();
             //s.computers = query.value("Computers").toString().toStdString();
@@ -53,11 +53,11 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
     }
     else if(order == "construction year")
     {
-        query.exec("SELECT * FROM scientists ORDER BY ConstructionYear");
+        query.exec("SELECT * FROM Computers ORDER BY ConstructionYear");
 
         while(query.next()){ //fer aldrei herna inn!
             c.name = query.value("Name").toString().toStdString();
-            c.constructionYear = query.value("ConstructionYear").toString().toStdString();
+            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
             c.constructed = query.value("Constructed").toString().toStdString();
             //s.computers = query.value("Computers").toString().toStdString();
@@ -69,11 +69,11 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
     }
     else if(order == "type")
     {
-        query.exec("SELECT * FROM scientists ORDER BY Type");
+        query.exec("SELECT * FROM Computers ORDER BY Type");
 
         while(query.next()){ //fer aldrei herna inn!
             c.name = query.value("Name").toString().toStdString();
-            c.constructionYear = query.value("ConstructionYear").toString().toStdString();
+            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
             c.constructed = query.value("Constructed").toString().toStdString();
             //s.computers = query.value("Computers").toString().toStdString();
@@ -85,11 +85,11 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
     }
     else if(order == "constructed")
         {
-            query.exec("SELECT * FROM scientists ORDER BY Constructed");
+            query.exec("SELECT * FROM Computers ORDER BY Constructed");
 
             while(query.next()){ //fer aldrei herna inn!
                 c.name = query.value("Name").toString().toStdString();
-                c.constructionYear = query.value("ConstructionYear").toString().toStdString();
+                c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
                 c.type = query.value("Type").toString().toStdString();
                 c.constructed = query.value("Constructed").toString().toStdString();
                 //s.computers = query.value("Computers").toString().toStdString();

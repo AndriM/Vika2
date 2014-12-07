@@ -116,7 +116,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
-
         return scientist;
     }
     else if(order == "dod")
