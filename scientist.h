@@ -14,7 +14,7 @@ public:
     std::string dateOfBirth;
     std::string dateOfDeath;
     std::string gender;
-    std::string computers;
+    //std::string computers;
 };
 
 #endif // SCIENTIST_H

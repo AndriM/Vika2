@@ -24,7 +24,7 @@ ScientistRepository::ScientistRepository(std::string fname) {
             scientist.dateOfBirth = fields.at(1);
             scientist.dateOfDeath = fields.at(2);
             scientist.gender = fields.at(3);
-            scientist.computers = fields.at(4);
+            //scientist.computers = fields.at(4);
             scientistList.push_back(scientist);
         }
         scientistFile.close();
@@ -100,6 +100,8 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
+
+        return scientist;
     }
     else if(order == "dob")
     {
@@ -114,6 +116,8 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
+
+        return scientist;
     }
     else if(order == "dod")
     {
@@ -128,27 +132,29 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
        }
+
+        return scientist;
     }
     else if(order == "gender")
         {
-            query.exec("SELECT * FROM scientists ORDER BY Gender");
+        query.exec("SELECT * FROM scientists ORDER BY Gender");
 
-            while(query.next()){ //fer aldrei herna inn!
-                s.name = query.value("Name").toString().toStdString();
-                s.gender = query.value("Gender").toString().toStdString();
-                s.dateOfBirth = query.value("BirthYear").toString().toStdString();
-                s.dateOfDeath = query.value("DeathYear").toString().toStdString();
-                //s.computers = query.value("Computers").toString().toStdString();
+        while(query.next()){
+            s.name = query.value("Name").toString().toStdString();
+            s.gender = query.value("Gender").toString().toStdString();
+            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            //s.computers = query.value("Computers").toString().toStdString();
 
-                scientist.push_back(s);
-            }
+            scientist.push_back(s);
+        }
+
+        return scientist;
         }
     else
         {
-            exit(0);
+        exit(0);
         }
-
-    return scientist;
 }
 std::list<Scientist> ScientistRepository::list(std::string col, std::string mod) {
     std::list<Scientist> outList = std::list<Scientist>();
@@ -175,7 +181,7 @@ void ScientistRepository::save() {
     }
 
     for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++) {
-        scientistFile << (*iter).name << delimiter << (*iter).dateOfBirth << delimiter << (*iter).dateOfDeath << delimiter << (*iter).gender << delimiter << (*iter).computers << std::endl;
+        scientistFile << (*iter).name << delimiter << (*iter).dateOfBirth << delimiter << (*iter).dateOfDeath << delimiter << (*iter).gender << std::endl;
     }
     scientistFile.flush();
     scientistFile.close();

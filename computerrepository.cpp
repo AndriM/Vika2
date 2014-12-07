@@ -48,6 +48,8 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
         }
+
+        return comp;
     }
     else if(order == "construction year")
     {
@@ -62,6 +64,8 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
         }
+
+        return comp;
     }
     else if(order == "type")
     {
@@ -76,6 +80,8 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
         }
+
+        return comp;
     }
     else if(order == "constructed")
         {
@@ -90,6 +96,8 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
                 comp.push_back(c);
             }
+
+            return comp;
         }
     else
         {
