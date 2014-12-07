@@ -1,4 +1,4 @@
-#ifndef SCIENTISTREPOSITORY_H
+ #ifndef SCIENTISTREPOSITORY_H
 #define SCIENTISTREPOSITORY_H
 
 #include <fstream>

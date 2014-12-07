@@ -46,6 +46,7 @@ void ScientistRepository::openDatabase()
 void ScientistRepository::add(Scientist scientist) {
     openDatabase();
     QSqlQuery query;
+
     query.prepare("INSERT INTO scientists (Name, BirthYear, DeathYear, Gender)"
                   "VALUES(:name, :dateOfBirth, :dateOfDeath, :gender)");
     query.bindValue(":name",        QString::fromStdString(scientist.name));
@@ -60,9 +61,6 @@ void ScientistRepository::add(Scientist scientist) {
 //    scientistList.push_back(scientist);
 //    save();
 }
-
-
-
 std::list<Scientist> ScientistRepository::list() {
     std::list<Scientist> scientist = std::list<Scientist>();
 

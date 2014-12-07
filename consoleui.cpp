@@ -35,15 +35,16 @@ void ConsoleUI::waitForPrompt() {
     std::cin.ignore();
     std::cin.get();
 }
-
 int ConsoleUI::respondToMessage() {
 
     //std::cout << MAIN_MENU << std::endl;
 
     /*std::string userRequest;
     std::cin >> userRequest;*/
+    char wantToGoAgain;
     int answer;
-
+    do
+    {
     std::cout <<"Choose:\n\t1: Computer scientist.\n\t2: Computer" <<endl;
     std::cin >> answer;
 
@@ -151,6 +152,10 @@ int ConsoleUI::respondToMessage() {
             std::cin >> additionalComputer.constructed;
             clear();
             scienceService.addComputer(additionalComputer);}
+    }
+        std::cout << "Do you want to go again (y/n): ";
+        std::cin >> wantToGoAgain;
+    }while(wantToGoAgain == 'Y' || wantToGoAgain =='y');
         /*} else if(userRequest.find("search") != std::string::npos) {
             clear();
             std::string searchTerm = "";
@@ -196,6 +201,6 @@ int ConsoleUI::respondToMessage() {
     }
     return 1;
         }*/
-}
+//}
     return 0;
 }
