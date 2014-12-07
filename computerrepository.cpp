@@ -1,121 +1,103 @@
 #include "computerrepository.h"
 
-/*    string name;
-    string constructionYear;
-    string type;
-    bool constructed;
-
-ComputerRepository::ComputerRepository(std::string fname) {
-    filename = fname;
-    delimiter = '\t';
-    std::ifstream computerFile;
-
-    try {
-        computerFile.open(filename.c_str(),std::ios::in);
-    } catch(...) {
-        // Ignore the error, the file is non existent and will be created next time we save.
-    }
-
-    computerList = std::list<computer>();
-
-    if(computerFile.is_open()) {
-        std::string lineToRead = "";
-
-        // Load all records into memory
-        while(std::getline(computerFile,lineToRead)) {
-            computer cpu = computer();
-            std::vector<std::string> fields = util::split(lineToRead,delimiter);
-            cpu.name = fields.at(0);
-            cpu.constructionYear = fields.at(1);
-            cpu.type = fields.at(2);
-            cpu.constructed = fields.at(3);
-            computerList.push_back(cpu);
-        }
-        computerFile.close();
-    }
+ComputerRepository::ComputerRepository()
+{
 }
 
-ComputerRepository::~ComputerRepository() {
+void ComputerRepository::openDatabase()
+{
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "science_db.sqlite";
+    db.setDatabaseName(dbName);
+    db.open();
 }
 
-void ComputerRepository::add(computer cpu) {
+void ComputerRepository::add(computer computer) {
+    openDatabase();
     QSqlQuery query;
-
-    query.prepare("INSERT INTO computers (Name, Construction Year, Type, Constructed)"
+    query.prepare("INSERT INTO Computers (Name, ConstructionYear, Type, Constructed)"
                   "VALUES(:name, :constructionYear, :type, :constructed)");
-    query.bindValue(":name",             QString::fromStdString(cpu.name));
-    query.bindValue(":constructionYear", QString::fromStdString(cpu.constructionYear));
-    query.bindValue(":type",             QString::fromStdString(cpu.type));
-    query.bindValue(":constructed",      QString::fromStdString(cpu.constructed));
+    query.bindValue(":name",        QString::fromStdString(computer.name));
+    query.bindValue(":constructionYear", QString::fromStdString(computer.constructionYear));
+    query.bindValue(":type", QString::fromStdString(computer.type));
+    query.bindValue(":constructed",      QString::fromStdString(computer.constructed));
 
     query.exec();
-//    Replace our chosen delimiter with space to avoid breaking the delimited format of the file
-//    std::replace(cpu.name.begin(),cpu.name.end(),delimiter,' ');
-//    computerList.push_back(cpu);
+//     Replace our chosen delimiter with space to avoid breaking the delimited format of the file
+//    std::replace(scientist.name.begin(),scientist.name.end(),delimiter,' ');
+//    scientistList.push_back(scientist);
 //    save();
 }
+std::list<computer> ComputerRepository::orderBy(std::string order) {
 
-
-std::list<computer> ComputerRepository::list() {
-    std::list<computer> computers = std::list<computer>();
-
+    std::list<computer> comp = std::list<computer>();
+    openDatabase();
     QSqlQuery query;
-    query.exec("SELECT * FROM computers");
+    if(order == "name")
+    {
+        query.exec("SELECT * FROM scientists ORDER BY Name");
 
-    query.exec("SELECT s.Name, j.s_ID AS 'ScientistID', j.c_ID AS 'ComputerID, FROM computers"
-               "INNER JOIN Joined j"
-               "ON j.s_ID = s.ID");
-    while(query.next()){
-        computer cpu = computer();
-        cpu.name = query.value("Name").toString().toStdString();
-        cpu.constructionYear = query.value("ConstructionYear").toString().toStdString();
-        cpu.type = query.value("Type").toString().toStdString();
-        cpu.constructed = query.value("Constructed").toString().toStdString();
+        while(query.next()){ //fer aldrei herna inn!
+            computer c = computer();
+            c.name = query.value("Name").toString().toStdString();
+            c.constructionYear = query.value("ConstructionYear").toString().toStdString();
+            c.type = query.value("Type").toString().toStdString();
+            c.constructed = query.value("Constructed").toString().toStdString();
+            //s.computers = query.value("Computers").toString().toStdString();
 
-        computers.push_back(cpu);
-
-    }
-    return computers;
-}
-
-std::list<computer> ComputerRepository::list(std::string col, std::string mod) {
-    std::list<computer> outList = std::list<computer>();
-    outList = deepCopy();
-    Comparer comp = Comparer(col,mod);
-    outList.sort(comp);
-    return outList;
-}
-
-std::list<computer> ComputerRepository::deepCopy() {
-    std::list<computer> outList = std::list<computer>();
-    for(std::list<computer>::iterator iter = computerList.begin(); iter != computerList.end(); iter++) {
-        outList.push_back(computer(*iter));
-    }
-    return outList;
-}
-
-void ComputerRepository::save() {
-    std::ofstream computerFile;
-    computerFile.open(filename.c_str());
-
-    if(!computerFile.is_open()) {
-        throw std::runtime_error("Failed to open " + filename);
-    }
-
-    for(std::list<computer>::iterator iter = computerList.begin(); iter != computerList.end(); iter++) {
-        computerFile << (*iter).name << delimiter << (*iter).constructionYear << delimiter << (*iter).type << delimiter << (*iter).constructed << std::endl;
-    }
-    computerFile.flush();
-    computerFile.close();
-}
-
-computer* ComputerRepository::search(std::string searchTerm) {
-    // Naive search implementation, finds the case sensitive substring in the name and returns first match
-    for(std::list<computer>::iterator iter = computerList.begin(); iter != computerList.end(); iter++) {
-        if(iter->name.find(searchTerm) != std::string::npos) {
-            return new computer(*iter);
+            comp.push_back(c);
         }
     }
-    return NULL;
+    else if(order == "construction year")
+    {
+        query.exec("SELECT * FROM scientists ORDER BY ConstructionYear");
+
+        while(query.next()){ //fer aldrei herna inn!
+            computer c = computer();
+            c.name = query.value("Name").toString().toStdString();
+            c.constructionYear = query.value("ConstructionYear").toString().toStdString();
+            c.type = query.value("Type").toString().toStdString();
+            c.constructed = query.value("Constructed").toString().toStdString();
+            //s.computers = query.value("Computers").toString().toStdString();
+
+            comp.push_back(c);
+        }
+    }
+    else if(order == "type")
+    {
+        query.exec("SELECT * FROM scientists ORDER BY Type");
+
+        while(query.next()){ //fer aldrei herna inn!
+            computer c = computer();
+            c.name = query.value("Name").toString().toStdString();
+            c.constructionYear = query.value("ConstructionYear").toString().toStdString();
+            c.type = query.value("Type").toString().toStdString();
+            c.constructed = query.value("Constructed").toString().toStdString();
+            //s.computers = query.value("Computers").toString().toStdString();
+
+            comp.push_back(c);
+        }
+    }
+    else if(order == "constructed")
+        {
+            query.exec("SELECT * FROM scientists ORDER BY Constructed");
+
+            while(query.next()){ //fer aldrei herna inn!
+                computer c = computer();
+                c.name = query.value("Name").toString().toStdString();
+                c.constructionYear = query.value("ConstructionYear").toString().toStdString();
+                c.type = query.value("Type").toString().toStdString();
+                c.constructed = query.value("Constructed").toString().toStdString();
+                //s.computers = query.value("Computers").toString().toStdString();
+
+                comp.push_back(c);
+            }
+        }
+    else
+        {
+            exit(0);
+        }
+
+    return comp;
 }
-*/
