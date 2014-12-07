@@ -7,17 +7,19 @@ std::string MAIN_MENU = "Please use the following commands to interface with thi
         add     : Add a record to the database\n\
         order   : Order and dislay the records in the database\n\
         search  : Searches for a scientist\n\
+        display : Display scientists.\n\
         exit    : Exit the program";
 
 std::string FILTER_MENU = "Enter one of the following commands to order by the corresponding column\n\
-along with an ascending(asc) or descending(desc) modifier\n\
         name    : Name\n\
         dob     : Date of birth\n\
         dod     : Date of death\n\
-        gender  : Gender\n\n\
-        Example: \"name desc\"";
+        gender  : Gender";
 
-//std::string FILTER_MENU2 = tarf ad bua til fyrir computer
-
+std::string FILTER_MENU2 = "Enter one of the following commands to order by the corresponding column\n\
+        name                  : Name\n\
+        construction year     : Construction Year\n\
+        type                  : Type\n\
+        constructed           : Constructed";
 
 #endif // MENUS_H

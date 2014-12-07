@@ -70,8 +70,8 @@ int ConsoleUI::respondToMessage() {
             std::cout << "Enter the gender of the scientist: ";
             std::cin >> additionalScientist.gender;
             clear();
-            std::cout << "Enter computer(s) that the scientist has worked on: ";
-            std::cin >> additionalScientist.computers;
+            /*std::cout << "Enter computer(s) that the scientist has worked on: ";
+            std::cin >> additionalScientist.computers;*/
             scienceService.addScientist(additionalScientist);
         } else if(userRequest.find("search") != std::string::npos) {
             clear();
@@ -83,8 +83,8 @@ int ConsoleUI::respondToMessage() {
             Scientist* searchResult = scienceService.search(searchTerm);
             if(searchResult) {
                 std::cout << "Scientist found!!" << std::endl;
-                std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\t\tComputers:\n";
-                std::cout << searchResult->name << "\t" << searchResult->dateOfBirth << "\t\t" << searchResult->dateOfDeath << "\t\t" << searchResult->gender << "\t\t" << searchResult->computers << "\t\t" << std::endl;
+                std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\n";
+                std::cout << searchResult->name << "\t" << searchResult->dateOfBirth << "\t\t" << searchResult->dateOfDeath << "\t\t" << searchResult->gender << "\t\t" << "\t\t" << std::endl;
             } else {
                 std::cout << "No results found for the term: " << searchTerm << std::endl;
             }
@@ -98,9 +98,9 @@ int ConsoleUI::respondToMessage() {
             std::cin >> filterCol >> filterMod;
             clear();
             std::list<Scientist> l = scienceService.getScientistsOrderedBy(filterCol,filterMod);
-            std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\tComputers:\n"; //skoda tab
+            std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\n";
             for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
-                std::cout << iter->name << "\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender <<  "\t\t" << iter->computers << std::endl;
+                std::cout << iter->name << "\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
             }
             waitForPrompt();
             clear();
@@ -108,12 +108,13 @@ int ConsoleUI::respondToMessage() {
         {
             std::list<Scientist> s = scienceService.getAllScientists();
 
-            /*list<Scientist>::iterator i;
-            for(i = s.begin(); i != s.end(); i++)
-            {
-                std::cout << *i << endl;
+            std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
+
+            for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
+                std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
             }
-            //skrifa ut listann*/
+
+            //skrifa ut listann
 
         }else if (userRequest.find("exit") != std::string::npos) {
             return 0;
@@ -177,7 +178,7 @@ int ConsoleUI::respondToMessage() {
             clear();
             std::string filterCol = "";
             std::string filterMod = "";
-            std::cout << FILTER_MENU << std::endl;
+            std::cout << FILTER_MENU2 << std::endl;
             std::cin >> filterCol >> filterMod;
             clear();
             std::list<computer> l = computerService.getComputersOrderedBy(filterCol,filterMod);

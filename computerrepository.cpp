@@ -34,12 +34,12 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
     std::list<computer> comp = std::list<computer>();
     openDatabase();
     QSqlQuery query;
+    computer c = computer();
     if(order == "name")
     {
         query.exec("SELECT * FROM scientists ORDER BY Name");
 
         while(query.next()){ //fer aldrei herna inn!
-            computer c = computer();
             c.name = query.value("Name").toString().toStdString();
             c.constructionYear = query.value("ConstructionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
@@ -54,7 +54,6 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM scientists ORDER BY ConstructionYear");
 
         while(query.next()){ //fer aldrei herna inn!
-            computer c = computer();
             c.name = query.value("Name").toString().toStdString();
             c.constructionYear = query.value("ConstructionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
@@ -69,7 +68,6 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM scientists ORDER BY Type");
 
         while(query.next()){ //fer aldrei herna inn!
-            computer c = computer();
             c.name = query.value("Name").toString().toStdString();
             c.constructionYear = query.value("ConstructionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
@@ -84,7 +82,6 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             query.exec("SELECT * FROM scientists ORDER BY Constructed");
 
             while(query.next()){ //fer aldrei herna inn!
-                computer c = computer();
                 c.name = query.value("Name").toString().toStdString();
                 c.constructionYear = query.value("ConstructionYear").toString().toStdString();
                 c.type = query.value("Type").toString().toStdString();

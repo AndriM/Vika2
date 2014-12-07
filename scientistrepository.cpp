@@ -62,17 +62,15 @@ void ScientistRepository::add(Scientist scientist) {
 //    save();
 }
 std::list<Scientist> ScientistRepository::list() {
+
     std::list<Scientist> scientist = std::list<Scientist>();
 
     openDatabase();
     QSqlQuery query;
+    Scientist s = Scientist();
     query.exec("SELECT * FROM scientists");
 
-    /*query.exec("SELECT c.Name, j.c_ID AS 'ComputerID', j.s_ID AS 'ScientistID, FROM computers"
-               "INNER JOIN Joined j"
-               "ON j.c_ID = c.ID");*/
     while(query.next()){ //fer aldrei herna inn!
-        Scientist s = Scientist();
         s.name = query.value("Name").toString().toStdString();
         s.gender = query.value("Gender").toString().toStdString();
         s.dateOfBirth = query.value("BirthYear").toString().toStdString();
@@ -88,12 +86,12 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
     std::list<Scientist> scientist = std::list<Scientist>();
     openDatabase();
     QSqlQuery query;
+    Scientist s = Scientist();
     if(order == "name")
     {
         query.exec("SELECT * FROM scientists ORDER BY Name");
 
         while(query.next()){ //fer aldrei herna inn!
-            Scientist s = Scientist();
             s.name = query.value("Name").toString().toStdString();
             s.gender = query.value("Gender").toString().toStdString();
             s.dateOfBirth = query.value("BirthYear").toString().toStdString();
@@ -108,7 +106,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM scientists ORDER BY BirthYear");
 
         while(query.next()){ //fer aldrei herna inn!
-            Scientist s = Scientist();
             s.name = query.value("Name").toString().toStdString();
             s.gender = query.value("Gender").toString().toStdString();
             s.dateOfBirth = query.value("BirthYear").toString().toStdString();
@@ -123,7 +120,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM scientists ORDER BY DeathYear");
 
         while(query.next()){ //fer aldrei herna inn!
-            Scientist s = Scientist();
             s.name = query.value("Name").toString().toStdString();
             s.gender = query.value("Gender").toString().toStdString();
             s.dateOfBirth = query.value("BirthYear").toString().toStdString();
@@ -138,7 +134,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
             query.exec("SELECT * FROM scientists ORDER BY Gender");
 
             while(query.next()){ //fer aldrei herna inn!
-                Scientist s = Scientist();
                 s.name = query.value("Name").toString().toStdString();
                 s.gender = query.value("Gender").toString().toStdString();
                 s.dateOfBirth = query.value("BirthYear").toString().toStdString();
