@@ -103,7 +103,18 @@ int ConsoleUI::respondToMessage() {
             }
             waitForPrompt();
             clear();
-        } else if (userRequest.find("exit") != std::string::npos) {
+        }else if(userRequest.find("display") != std::string::npos)
+        {
+            std::list<Scientist> s = scienceService.getAllScientists();
+
+            /*list<Scientist>::iterator i;
+            for(i = s.begin(); i != s.end(); i++)
+            {
+                std::cout << *i << endl;
+            }
+            //skrifa ut listann*/
+
+        }else if (userRequest.find("exit") != std::string::npos) {
             return 0;
         } else {
             throw std::runtime_error( userRequest + " is not a valid command.");

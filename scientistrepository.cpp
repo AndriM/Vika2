@@ -1,6 +1,5 @@
 #include "scientistrepository.h"
 
-
 ScientistRepository::ScientistRepository(std::string fname) {
     filename = fname;
     delimiter = '\t';
@@ -35,16 +34,25 @@ ScientistRepository::ScientistRepository(std::string fname) {
 ScientistRepository::~ScientistRepository() {
 }
 
+void ScientistRepository::openDatabase()
+{
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "science_db.sqlite";
+    db.setDatabaseName(dbName);
+    db.open();
+}
+
 void ScientistRepository::add(Scientist scientist) {
     openDatabase();
     QSqlQuery query;
-    query.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear, Computers)"
-                  "VALUES(:name, :dateOfBirth, :dateOfDeath, :gender, :computers)");
+    query.prepare("INSERT INTO scientists (Name, BirthYear, DeathYear, Gender)"
+                  "VALUES(:name, :dateOfBirth, :dateOfDeath, :gender)");
     query.bindValue(":name",        QString::fromStdString(scientist.name));
     query.bindValue(":dateOfBirth", QString::fromStdString(scientist.dateOfBirth));
     query.bindValue(":dateOfDeath", QString::fromStdString(scientist.dateOfDeath));
     query.bindValue(":gender",      QString::fromStdString(scientist.gender));
-    query.bindValue(":computers",   QString::fromStdString(scientist.computers));
+    //query.bindValue(":computers",   QString::fromStdString(scientist.computers));
 
     query.exec();
 //     Replace our chosen delimiter with space to avoid breaking the delimited format of the file
@@ -54,30 +62,101 @@ void ScientistRepository::add(Scientist scientist) {
 }
 
 
+
 std::list<Scientist> ScientistRepository::list() {
     std::list<Scientist> scientist = std::list<Scientist>();
 
-
+    openDatabase();
     QSqlQuery query;
     query.exec("SELECT * FROM scientists");
 
-    query.exec("SELECT c.Name, j.c_ID AS 'ComputerID', j.s_ID AS 'ScientistID, FROM computers"
+    /*query.exec("SELECT c.Name, j.c_ID AS 'ComputerID', j.s_ID AS 'ScientistID, FROM computers"
                "INNER JOIN Joined j"
-               "ON j.c_ID = c.ID");
-    while(query.next()){
+               "ON j.c_ID = c.ID");*/
+    while(query.next()){ //fer aldrei herna inn!
         Scientist s = Scientist();
         s.name = query.value("Name").toString().toStdString();
         s.gender = query.value("Gender").toString().toStdString();
         s.dateOfBirth = query.value("BirthYear").toString().toStdString();
         s.dateOfDeath = query.value("DeathYear").toString().toStdString();
-        s.computers = query.value("Computers").toString().toStdString();
+        //s.computers = query.value("Computers").toString().toStdString();
 
         scientist.push_back(s);
-
     }
     return scientist;
 }
+std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
+    std::list<Scientist> scientist = std::list<Scientist>();
+    openDatabase();
+    QSqlQuery query;
+    if(order == "name")
+    {
+        query.exec("SELECT * FROM scientists ORDER BY Name");
+
+        while(query.next()){ //fer aldrei herna inn!
+            Scientist s = Scientist();
+            s.name = query.value("Name").toString().toStdString();
+            s.gender = query.value("Gender").toString().toStdString();
+            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            //s.computers = query.value("Computers").toString().toStdString();
+
+            scientist.push_back(s);
+        }
+    }
+    else if(order == "dob")
+    {
+        query.exec("SELECT * FROM scientists ORDER BY BirthYear");
+
+        while(query.next()){ //fer aldrei herna inn!
+            Scientist s = Scientist();
+            s.name = query.value("Name").toString().toStdString();
+            s.gender = query.value("Gender").toString().toStdString();
+            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            //s.computers = query.value("Computers").toString().toStdString();
+
+            scientist.push_back(s);
+        }
+    }
+    else if(order == "dod")
+    {
+        query.exec("SELECT * FROM scientists ORDER BY DeathYear");
+
+        while(query.next()){ //fer aldrei herna inn!
+            Scientist s = Scientist();
+            s.name = query.value("Name").toString().toStdString();
+            s.gender = query.value("Gender").toString().toStdString();
+            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            //s.computers = query.value("Computers").toString().toStdString();
+
+            scientist.push_back(s);
+       }
+    }
+    else if(order == "gender")
+        {
+            query.exec("SELECT * FROM scientists ORDER BY Gender");
+
+            while(query.next()){ //fer aldrei herna inn!
+                Scientist s = Scientist();
+                s.name = query.value("Name").toString().toStdString();
+                s.gender = query.value("Gender").toString().toStdString();
+                s.dateOfBirth = query.value("BirthYear").toString().toStdString();
+                s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+                //s.computers = query.value("Computers").toString().toStdString();
+
+                scientist.push_back(s);
+            }
+        }
+    else
+        {
+            exit(0);
+        }
+
+    return scientist;
+}
 std::list<Scientist> ScientistRepository::list(std::string col, std::string mod) {
     std::list<Scientist> outList = std::list<Scientist>();
     outList = deepCopy();
@@ -85,18 +164,10 @@ std::list<Scientist> ScientistRepository::list(std::string col, std::string mod)
     outList.sort(comp);
     return outList;
 }
-void ScientistRepository::openDatabase()
-{
-    QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "science_db.sqlite";
-    db.setDatabaseName(dbName);
-    bool db_ok = db.open();
-
-}
 std::list<Scientist> ScientistRepository::deepCopy() {
     std::list<Scientist> outList = std::list<Scientist>();
-    for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++) {
+    for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++)
+    {
         outList.push_back(Scientist(*iter));
     }
     return outList;

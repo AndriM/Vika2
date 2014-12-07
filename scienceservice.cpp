@@ -12,7 +12,8 @@ void ScienceService::addScientist(Scientist scientist) {
 }
 
 std::list<Scientist> ScienceService::getAllScientists() {
-    return scientistRepository.list();
+    std::list<Scientist> l = scientistRepository.list();
+    return l;
 }
 
 std::list<Scientist> ScienceService::getScientistsOrderedBy(std::string col, std::string mod) {
