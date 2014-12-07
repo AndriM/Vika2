@@ -13,15 +13,15 @@ void ComputerRepository::openDatabase()
     db.open();
 }
 
-void ComputerRepository::add(computer computer) {
+void ComputerRepository::add(computer comp) {
     openDatabase();
     QSqlQuery query;
-    query.prepare("INSERT INTO Computers (Name, ConstructionYear, Type, Constructed)"
+    query.prepare("INSERT INTO Computers (Name, ConstuctionYear, Type, Constructed)"
                   "VALUES(:name, :constructionYear, :type, :constructed)");
-    query.bindValue(":name",        QString::fromStdString(computer.name));
-    query.bindValue(":constructionYear", QString::fromStdString(computer.constructionYear));
-    query.bindValue(":type", QString::fromStdString(computer.type));
-    query.bindValue(":constructed",      QString::fromStdString(computer.constructed));
+    query.bindValue(":name",        QString::fromStdString(comp.name));
+    query.bindValue(":constructionYear", QString::fromStdString(comp.constructionYear));
+    query.bindValue(":type", QString::fromStdString(comp.type));
+    query.bindValue(":constructed",      QString::fromStdString(comp.constructed));
 
     query.exec();
 //     Replace our chosen delimiter with space to avoid breaking the delimited format of the file
