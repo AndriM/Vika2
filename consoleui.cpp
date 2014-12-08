@@ -50,7 +50,7 @@ int ConsoleUI::respondToMessage() {
             std::cout << MAIN_MENU << std::endl;
             std::string userRequest;
             std::cin >> userRequest;
-        //try {
+        try {
             // Handle all available commands and throw error on unknown ones
             if(userRequest.find("add") != std::string::npos) { //baeta við hvort vid viljum adda scientist eda computer
                 clear();
@@ -129,20 +129,21 @@ int ConsoleUI::respondToMessage() {
                 throw std::runtime_error( userRequest + " is not a valid command.");
             }
         }
-           /*catch(std::runtime_error e) {
+           catch(std::runtime_error e) {
             clear();
             std::cout << "Command caused an error: " << e.what() << std::endl;
             std::cout << "Please try another command" << std::endl;
             waitForPrompt();
             clear();
-        }*/
+        }
 
+        }
         if(answer == 2){ //tarf ad breyta ollu herna ur scientist i computer
             std::cout << MAIN_MENU << std::endl;
             std::string userRequest;
             std::cin >> userRequest;
-        //try {
-            // Handle all available commands and throw error on unknown ones
+        try {
+            //Handle all available commands and throw error on unknown ones
             if(userRequest.find("add") != std::string::npos) { //baeta við hvort vid viljum adda scientist eda computer
                 clear();
                 computer additionalComputer = computer();
@@ -211,22 +212,20 @@ int ConsoleUI::respondToMessage() {
                     //connect fall
                 }
 
-             /*else if (userRequest.find("exit") != std::string::npos) {
+             else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
             } else {
                 throw std::runtime_error( userRequest + " is not a valid command.");
+        }}
+        //return 1;
+            } catch(std::runtime_error e) {
+                clear();
+                std::cout << "Command caused an error: " << e.what() << std::endl;
+                std::cout << "Please try another command" << std::endl;
+                waitForPrompt();
+                clear();
+            }
         }
-        catch(std::runtime_error e) {
-            clear();
-            std::cout << "Command caused an error: " << e.what() << std::endl;
-            std::cout << "Please try another command" << std::endl;
-            waitForPrompt();
-            clear();
-        }
-        return 1;
-            }*/
-    //}
-            }}
         std::cout << "Do you want to go again? (y/n): ";
         std::cin >> wantToGoAgain;
     }while(wantToGoAgain == 'Y' || wantToGoAgain =='y');

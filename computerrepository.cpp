@@ -142,7 +142,6 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             exit(0);
         }
 }
-
 std::list<computer> ComputerRepository::search(std::string searchField, std::string searchTerm) {
     std::list<computer> comp = std::list<computer>();
     computerDB = openDatabase();
