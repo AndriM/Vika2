@@ -34,19 +34,15 @@ ScientistRepository::ScientistRepository(std::string fname) {
 ScientistRepository::~ScientistRepository() {
 }
 
-//void ScientistRepository::openDatabase() {
+
 QSqlDatabase ScientistRepository::openDatabase() {
-
     QString connectionName = "DatabaseConnection";
-
     QSqlDatabase db;
 
-    if(QSqlDatabase::contains("DatabaseConnection"))
-    {
+    if(QSqlDatabase::contains("DatabaseConnection")) {
         db = QSqlDatabase::database("DatabaseConnection");
     }
-    else
-    {
+    else {
         db = QSqlDatabase::addDatabase("QSQLITE", "DatabaseConnection");
         QString dbName = "science_db.sqlite";
         db.setDatabaseName(dbName);
@@ -79,7 +75,6 @@ void ScientistRepository::add(Scientist scientist) {
 }
 
 std::list<Scientist> ScientistRepository::list() {
-
     std::list<Scientist> scientist = std::list<Scientist>();
 
     scientistDB = openDatabase();
@@ -98,14 +93,12 @@ std::list<Scientist> ScientistRepository::list() {
 
         scientist.push_back(s);
     }
-
     scientistDB.close();
 
     return scientist;
 }
 
 std::list<Scientist> ScientistRepository::orderBy(std::string order) {
-
     std::list<Scientist> scientist = std::list<Scientist>();
 
     scientistDB = openDatabase();
@@ -125,7 +118,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
-
         scientistDB.close();
 
         return scientist;
@@ -142,7 +134,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
-
         scientistDB.close();
 
         return scientist;
@@ -162,7 +153,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
         scientistDB.close();
 
-
         return scientist;
     }
     else if(order == "gender") {
@@ -177,7 +167,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
-
         scientistDB.close();
 
         return scientist;
@@ -218,16 +207,6 @@ void ScientistRepository::save() {
     scientistFile.close();
 }
 
-//Scientist* ScientistRepository::search(std::string searchTerm) {
-//    // Naive search implementation, finds the case sensitive substring in the name and returns first match
-//    for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++) {
-//        if(iter->name.find(searchTerm) != std::string::npos) {
-//            return new Scientist(*iter);
-//        }
-//    }
-//    return NULL;
-//}
-
 std::list<Scientist> ScientistRepository::search(std::string searchField, std::string searchTerm) {
     std::list<Scientist> scientist = std::list<Scientist>();
     scientistDB = openDatabase();
@@ -247,7 +226,6 @@ std::list<Scientist> ScientistRepository::search(std::string searchField, std::s
 
             scientist.push_back(s);
         }
-
     scientistDB.close();
 
     return scientist;
