@@ -16,8 +16,7 @@ int ConsoleUI::start() {
     // REPL
     while(true) {
         int response = respondToMessage();
-        if( response == 0)
-        {
+        if( response == 0) {
             return 0;
         }
     }
@@ -34,6 +33,7 @@ void ConsoleUI::waitForPrompt() {
     std::cin.ignore();
     std::cin.get();
 }
+
 int ConsoleUI::respondToMessage() {
 
     //std::cout << MAIN_MENU << std::endl;
@@ -42,8 +42,7 @@ int ConsoleUI::respondToMessage() {
     std::cin >> userRequest;*/
     char wantToGoAgain;
     int answer;
-    do
-    {
+    do {
         std::cout <<"Choose:\n\t1: Computer scientist.\n\t2: Computer" <<endl;
         std::cin >> answer;
 
@@ -98,9 +97,9 @@ int ConsoleUI::respondToMessage() {
                 l = scienceService.orderScientists(orderby);
 
                 std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
-                for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
-                    std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
-                }
+                    for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
+                    }
 
                 /*std::string filterCol = "";
                 std::string filterMod = "";
@@ -117,11 +116,10 @@ int ConsoleUI::respondToMessage() {
                 std::list<Scientist> s = scienceService.getAllScientists();
 
                 std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
-                for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
-                    std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
-                }
-
-            }else if (userRequest.find("exit") != std::string::npos) {
+                    for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
+                    }
+            } else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
             } else {
                 throw std::runtime_error( userRequest + " is not a valid command.");
@@ -188,9 +186,9 @@ int ConsoleUI::respondToMessage() {
                 l = scienceService.orderComputers(orderby);
 
                 std::cout << "Name:\t\tConstruction Year:\tType:\tComputer constructed:\n";
-                for(std::list<computer>::iterator iter = l.begin(); iter != l.end(); iter ++) {
-                    std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
-                }
+                    for(std::list<computer>::iterator iter = l.begin(); iter != l.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
+                    }
 
              /*else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
