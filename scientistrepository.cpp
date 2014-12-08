@@ -228,14 +228,15 @@ void ScientistRepository::save() {
 //    return NULL;
 //}
 
-std::list<Scientist> ScientistRepository::search(std::string searchTerm) {
+std::list<Scientist> ScientistRepository::search(std::string searchField, std::string searchTerm) {
     std::list<Scientist> scientist = std::list<Scientist>();
     scientistDB = openDatabase();
     scientistDB.open();
     QSqlQuery query(scientistDB);
     Scientist s = Scientist();
-    QString qstr = QString::fromStdString(searchTerm);
-        query.exec("SELECT * FROM scientists s WHERE s.Name = \'" + qstr + "\'");
+    QString field = QString::fromStdString(searchField);
+    QString term = QString::fromStdString(searchTerm);
+        query.exec("SELECT * FROM scientists s WHERE s.\'" + field + "\' = \'" + term + "\'");
 
         while(query.next()){
             s.name = query.value("Name").toString().toStdString();

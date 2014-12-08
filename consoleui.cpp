@@ -73,13 +73,20 @@ int ConsoleUI::respondToMessage() {
                 scienceService.addScientist(additionalScientist);
             } else if(userRequest.find("search") != std::string::npos) {
                 clear();
+                std::string searchField = "";
                 std::string searchTerm = "";
-                std::cout << "Enter the search term: ";
-                std::cin.ignore();
-                std::getline(std::cin,searchTerm);
+                std::cout << "Enter a search field: ";
+                //std::cin.ignore();
+                //std::getline(std::cin,searchField);
+                std::cin >> searchField;
+                clear();
+                std::cout << "Enter what you want to search for: ";
+                //std::cin.ignore();
+                //std::getline(std::cin,searchTerm);
+                std::cin >> searchTerm;
                 clear();
                 //Scientist* searchResult = scienceService.search(searchTerm);
-                std::list<Scientist> s = scienceService.search(searchTerm);
+                std::list<Scientist> s = scienceService.search(searchField, searchTerm);
                 unsigned int i = 0;
                     for(;i < s.size(); i++) {
                         i++;
