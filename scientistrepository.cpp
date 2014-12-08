@@ -30,11 +30,8 @@ ScientistRepository::ScientistRepository(std::string fname) {
         scientistFile.close();
     }
 }
-
 ScientistRepository::~ScientistRepository() {
 }
-
-
 QSqlDatabase ScientistRepository::openDatabase() {
     QString connectionName = "DatabaseConnection";
     QSqlDatabase db;
@@ -50,7 +47,6 @@ QSqlDatabase ScientistRepository::openDatabase() {
     }
     return db;
 }
-
 void ScientistRepository::add(Scientist scientist) {
 
     scientistDB = openDatabase();
@@ -72,7 +68,6 @@ void ScientistRepository::add(Scientist scientist) {
 //    scientistList.push_back(scientist);
 //    save();
 }
-
 std::list<Scientist> ScientistRepository::list() {
     std::list<Scientist> scientist = std::list<Scientist>();
 
@@ -95,7 +90,6 @@ std::list<Scientist> ScientistRepository::list() {
 
     return scientist;
 }
-
 std::list<Scientist> ScientistRepository::orderBy(std::string order) {
     std::list<Scientist> scientist = std::list<Scientist>();
 
@@ -170,7 +164,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         exit(0);
     }
 }
-
 std::list<Scientist> ScientistRepository::search(std::string searchField, std::string searchTerm) {
     std::list<Scientist> scientist = std::list<Scientist>();
     scientistDB = openDatabase();
