@@ -24,8 +24,6 @@ public:
     // declared as a pointer so that we can return a null reference
     std::list<Scientist> search(std::string searchField, std::string searchTerm);
     std::list<Scientist> list();
-    // Returns a list ordered by column and modifier
-    std::list<Scientist> list(std::string col,std::string mod);
     std::list<Scientist> orderBy(std::string order);
     QSqlDatabase openDatabase();
 private:
@@ -36,7 +34,6 @@ private:
     // The character that delimits each column of a line
     char delimiter;
     // Deep copies the private list and returns a new instance
-    std::list<Scientist> deepCopy();
     // Persist the private list to a file
     void save();
     QSqlDatabase scientistDB;

@@ -31,14 +31,6 @@ std::list<computer> ScienceService::getAllComputers() {
     std::list<computer> l = computerRepository.list();
     return l;
 }
-std::list<Scientist> ScienceService::getScientistsOrderedBy(std::string col, std::string mod) {
-    return scientistRepository.list(col,mod);
-}
-
-//Scientist* ScienceService::search(std::string searchTerm) {
-//    return scientistRepository.search(searchTerm);
-//}
-
 std::list<Scientist> ScienceService::search(std::string searchField, std::string searchTerm) {
     return scientistRepository.search(searchField, searchTerm);
 }
