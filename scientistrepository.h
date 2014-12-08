@@ -41,6 +41,7 @@ private:
     std::list<Scientist> deepCopy();
     // Persist the private list to a file
     void save();
+    QSqlDatabase scientistDB;
 };
 
 #endif // SCIENTISTREPOSITORY_H

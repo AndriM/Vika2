@@ -83,10 +83,11 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             //s.computers = query.value("Computers").toString().toStdString();
 
             comp.push_back(c);
+            }
+            return comp;
         }
-        return comp;
-    } else {
-        exit(0);
-    }
-    return comp;
+    else
+        {
+            exit(0);
+        }
 }

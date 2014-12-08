@@ -41,19 +41,17 @@ QSqlDatabase ScientistRepository::openDatabase() {
 
     QSqlDatabase db;
 
-    if(QSqlDatabase::contains(connectionName))
+    if(QSqlDatabase::contains("DatabaseConnection"))
     {
-        db = QSqlDatabase::database(connectionName);
+        db = QSqlDatabase::database("DatabaseConnection");
     }
     else
     {
-        db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+        db = QSqlDatabase::addDatabase("QSQLITE", "DatabaseConnection");
         QString dbName = "science_db.sqlite";
         db.setDatabaseName(dbName);
-
         db.open();
     }
-
     return db;
 
     /*QSqlDatabase db;
@@ -64,8 +62,10 @@ QSqlDatabase ScientistRepository::openDatabase() {
 }
 
 void ScientistRepository::add(Scientist scientist) {
-    openDatabase();
-    QSqlQuery query;
+
+    scientistDB = openDatabase();
+    scientistDB.open();
+    QSqlQuery query(scientistDB);
 
     query.prepare("INSERT INTO scientists (Name, BirthYear, DeathYear, Gender)"
                   "VALUES(:name, :dateOfBirth, :dateOfDeath, :gender)");
@@ -76,6 +76,8 @@ void ScientistRepository::add(Scientist scientist) {
     //query.bindValue(":computers",   QString::fromStdString(scientist.computers));
 
     query.exec();
+    scientistDB.close();
+
 //     Replace our chosen delimiter with space to avoid breaking the delimited format of the file
 //    std::replace(scientist.name.begin(),scientist.name.end(),delimiter,' ');
 //    scientistList.push_back(scientist);
@@ -85,8 +87,11 @@ void ScientistRepository::add(Scientist scientist) {
 std::list<Scientist> ScientistRepository::list() {
 
     std::list<Scientist> scientist = std::list<Scientist>();
-    openDatabase();
-    QSqlQuery query;
+
+    scientistDB = openDatabase();
+    scientistDB.open();
+    QSqlQuery query(scientistDB);
+
     Scientist s = Scientist();
     query.exec("SELECT * FROM scientists");
 
@@ -99,14 +104,20 @@ std::list<Scientist> ScientistRepository::list() {
 
         scientist.push_back(s);
     }
+
+    scientistDB.close();
+
     return scientist;
 }
 
 std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
     std::list<Scientist> scientist = std::list<Scientist>();
-    openDatabase();
-    QSqlQuery query;
+
+    scientistDB = openDatabase();
+    scientistDB.open();
+    QSqlQuery query(scientistDB);
+
     Scientist s = Scientist();
     if(order == "name") {
         query.exec("SELECT * FROM scientists ORDER BY Name");
@@ -120,6 +131,9 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
+
+        scientistDB.close();
+
         return scientist;
     }
     else if(order == "dob") {
@@ -134,6 +148,9 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
+
+        scientistDB.close();
+
         return scientist;
     }
     else if(order == "dod") {
@@ -148,6 +165,10 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
        }
+
+        scientistDB.close();
+
+
         return scientist;
     }
     else if(order == "gender") {
@@ -162,6 +183,9 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
+
+        scientistDB.close();
+
         return scientist;
     }
     else {
@@ -211,8 +235,9 @@ void ScientistRepository::save() {
 
 std::list<Scientist> ScientistRepository::search(std::string searchTerm) {
     std::list<Scientist> scientist = std::list<Scientist>();
-    openDatabase();
-    QSqlQuery query;
+    scientistDB = openDatabase();
+    scientistDB.open();
+    QSqlQuery query(scientistDB);
     Scientist s = Scientist();
     QString qstr = QString::fromStdString(searchTerm);
         query.exec("SELECT * FROM scientists s WHERE s.Name = \'" + qstr + "\'");
@@ -226,5 +251,8 @@ std::list<Scientist> ScientistRepository::search(std::string searchTerm) {
 
             scientist.push_back(s);
         }
+
+    scientistDB.close();
+
     return scientist;
 }
