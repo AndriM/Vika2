@@ -94,7 +94,13 @@ int ConsoleUI::respondToMessage() {
                     for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
                     }
-                } else {
+                }
+                else if(userRequest.find("connect") != std::string::npos){
+
+                    //connect fall
+
+                }
+                else {
                     std::cout << "No results found for the term: " << searchTerm << std::endl;
                 }
                 waitForPrompt();
@@ -208,6 +214,10 @@ int ConsoleUI::respondToMessage() {
                         for(std::list<computer>::iterator iter = c.begin(); iter != c.end(); iter ++) {
                             std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
                         }
+                }
+                else if(userRequest.find("connect") != std::string::npos){
+
+                    //connect fall
                 }
 
              /*else if (userRequest.find("exit") != std::string::npos) {
