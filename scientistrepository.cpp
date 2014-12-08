@@ -34,12 +34,33 @@ ScientistRepository::ScientistRepository(std::string fname) {
 ScientistRepository::~ScientistRepository() {
 }
 
-void ScientistRepository::openDatabase() {
+//void ScientistRepository::openDatabase() {
+QSqlDatabase ScientistRepository::openDatabase() {
+
+    QString connectionName = "DatabaseConnection";
+
     QSqlDatabase db;
+
+    if(QSqlDatabase::contains(connectionName))
+    {
+        db = QSqlDatabase::database(connectionName);
+    }
+    else
+    {
+        db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+        QString dbName = "science_db.sqlite";
+        db.setDatabaseName(dbName);
+
+        db.open();
+    }
+
+    return db;
+
+    /*QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "science_db.sqlite";
     db.setDatabaseName(dbName);
-    db.open();
+    db.open();*/
 }
 
 void ScientistRepository::add(Scientist scientist) {

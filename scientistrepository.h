@@ -27,8 +27,9 @@ public:
     std::list<Scientist> list();
     // Returns a list ordered by column and modifier
     std::list<Scientist> list(std::string col,std::string mod);
-    void openDatabase();
+//    void openDatabase();
     std::list<Scientist> orderBy(std::string order);
+    QSqlDatabase openDatabase();
 private:
     // This list is maintained in memory and persisted with ScientistRepository::save()
     std::list<Scientist> scientistList;
