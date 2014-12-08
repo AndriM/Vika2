@@ -11,6 +11,7 @@ public:
     std::list<computer> orderBy(std::string order);
     std::list<computer> list();
     std::list<computer> search(std::string searchField, std::string searchTerm);
+    void connect(int cID, int sID);
 private:
     QSqlDatabase computerDB;
 };

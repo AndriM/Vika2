@@ -37,3 +37,11 @@ std::list<Scientist> ScienceService::searchScientists(std::string searchField, s
 std::list<computer> ScienceService::searchComputers(std::string searchField, std::string searchTerm) {
     return computerRepository.search(searchField, searchTerm);
 }
+void ScienceService::connectScientists(int sID, int cID)
+{
+    scientistRepository.connect(sID, cID);
+}
+void ScienceService::connectComputers(int cID, int sID)
+{
+    computerRepository.connect(cID,sID);
+}

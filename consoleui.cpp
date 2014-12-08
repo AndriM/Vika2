@@ -96,8 +96,22 @@ int ConsoleUI::respondToMessage() {
                 }
                 else if(userRequest.find("connect") != std::string::npos){
 
-                    //connect fall
+                    int sID = 0;
+                    int cID = 0;
 
+                    //bua til fall sem saekir listann ur db
+                    //prenta ut listann af scientists (name og id)
+                    std::cout <<"Which scientist do you want to connect a computer to?" <<endl;
+                    std::cout <<"Enter the Scientist ID.";
+                    std::cin >> sID;
+
+                    //bua til fall sem saekir listann ur db
+                    //prenta ut lista af computers (name og id)
+                    std::cout <<"Which computer do you want to connect to the scientist?" <<endl;
+                    std::cout <<"Enter the Computer ID.";
+                    std::cin >> cID;
+
+                    scienceService.connectScientists(sID,cID);
                 }
                 else {
                     std::cout << "No results found for the term: " << searchTerm << std::endl;
@@ -209,7 +223,20 @@ int ConsoleUI::respondToMessage() {
                 }
                 else if(userRequest.find("connect") != std::string::npos){
 
-                    //connect fall
+                    int sID = 0;
+                    int cID = 0;
+
+                    //prenta ut lista af computers (name og id)
+                    std::cout <<"Which computer do you want to connect to a scientist?" <<endl;
+                    std::cout <<"Enter the Computer ID.";
+                    std::cin >> cID;
+
+                    //prenta ut lista af scientists (name og id)
+                    std::cout <<"Which scientist do you want to connect to the computer?" <<endl;
+                    std::cout <<"Enter the Scientist ID.";
+                    std::cin >> sID;
+
+                    scienceService.connectComputers(cID, sID);
                 }
 
              else if (userRequest.find("exit") != std::string::npos) {

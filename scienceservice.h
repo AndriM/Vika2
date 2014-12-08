@@ -22,6 +22,8 @@ public:
     std::list<Scientist> orderScientists(std::string orderby);
     std::list<computer> getAllComputers();
     std::list<computer> searchComputers(std::string searchField, std::string searchTerm);
+    void connectScientists(int sID, int cID);
+    void connectComputers(int cID, int sID);
 private:
     ScientistRepository scientistRepository;
     ComputerRepository computerRepository;

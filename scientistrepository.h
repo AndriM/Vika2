@@ -26,6 +26,7 @@ public:
     std::list<Scientist> list();
     std::list<Scientist> orderBy(std::string order);
     QSqlDatabase openDatabase();
+    void connect(int sID, int cID);
 private:
     // This list is maintained in memory and persisted with ScientistRepository::save()
     std::list<Scientist> scientistList;

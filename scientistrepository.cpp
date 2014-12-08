@@ -47,6 +47,11 @@ QSqlDatabase ScientistRepository::openDatabase() {
     }
     return db;
 }
+
+void ScientistRepository::connect(int sID, int cID)
+{
+    //connecta i toflunum
+}
 void ScientistRepository::add(Scientist scientist) {
 
     scientistDB = openDatabase();
