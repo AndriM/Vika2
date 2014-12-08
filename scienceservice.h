@@ -14,7 +14,8 @@ public:
     ~ScienceService();
     void addScientist(Scientist scientist);
     // Returns the first scientist that matches the searchTerm
-    Scientist* search(std::string searchTerm);
+//    Scientist* search(std::string searchTerm);
+    std::list<Scientist> search();
     std::list<Scientist> getAllScientists();
     std::list<Scientist> getScientistsOrderedBy(std::string,std::string);
     void addComputer(computer comp);

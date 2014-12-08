@@ -34,8 +34,7 @@ ScientistRepository::ScientistRepository(std::string fname) {
 ScientistRepository::~ScientistRepository() {
 }
 
-void ScientistRepository::openDatabase()
-{
+void ScientistRepository::openDatabase() {
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "science_db.sqlite";
@@ -61,6 +60,7 @@ void ScientistRepository::add(Scientist scientist) {
 //    scientistList.push_back(scientist);
 //    save();
 }
+
 std::list<Scientist> ScientistRepository::list() {
 
     std::list<Scientist> scientist = std::list<Scientist>();
@@ -69,7 +69,7 @@ std::list<Scientist> ScientistRepository::list() {
     Scientist s = Scientist();
     query.exec("SELECT * FROM scientists");
 
-    while(query.next()){ //fer aldrei herna inn!
+    while(query.next()){
         s.name = query.value("Name").toString().toStdString();
         s.gender = query.value("Gender").toString().toStdString();
         s.dateOfBirth = query.value("BirthYear").toString().toStdString();
@@ -80,17 +80,17 @@ std::list<Scientist> ScientistRepository::list() {
     }
     return scientist;
 }
+
 std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
     std::list<Scientist> scientist = std::list<Scientist>();
     openDatabase();
     QSqlQuery query;
     Scientist s = Scientist();
-    if(order == "name")
-    {
+    if(order == "name") {
         query.exec("SELECT * FROM scientists ORDER BY Name");
 
-        while(query.next()){ //fer aldrei herna inn!
+        while(query.next()){
             s.name = query.value("Name").toString().toStdString();
             s.gender = query.value("Gender").toString().toStdString();
             s.dateOfBirth = query.value("BirthYear").toString().toStdString();
@@ -101,11 +101,10 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         }
         return scientist;
     }
-    else if(order == "dob")
-    {
+    else if(order == "dob") {
         query.exec("SELECT * FROM scientists ORDER BY BirthYear");
 
-        while(query.next()){ //fer aldrei herna inn!
+        while(query.next()){
             s.name = query.value("Name").toString().toStdString();
             s.gender = query.value("Gender").toString().toStdString();
             s.dateOfBirth = query.value("BirthYear").toString().toStdString();
@@ -116,11 +115,10 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         }
         return scientist;
     }
-    else if(order == "dod")
-    {
+    else if(order == "dod") {
         query.exec("SELECT * FROM scientists ORDER BY DeathYear");
 
-        while(query.next()){ //fer aldrei herna inn!
+        while(query.next()){
             s.name = query.value("Name").toString().toStdString();
             s.gender = query.value("Gender").toString().toStdString();
             s.dateOfBirth = query.value("BirthYear").toString().toStdString();
@@ -131,8 +129,7 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
        }
         return scientist;
     }
-    else if(order == "gender")
-    {
+    else if(order == "gender") {
         query.exec("SELECT * FROM scientists ORDER BY Gender");
 
         while(query.next()){
@@ -146,8 +143,7 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         }
         return scientist;
     }
-    else
-    {
+    else {
         exit(0);
     }
 }
@@ -158,10 +154,10 @@ std::list<Scientist> ScientistRepository::list(std::string col, std::string mod)
     outList.sort(comp);
     return outList;
 }
+
 std::list<Scientist> ScientistRepository::deepCopy() {
     std::list<Scientist> outList = std::list<Scientist>();
-    for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++)
-    {
+    for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++) {
         outList.push_back(Scientist(*iter));
     }
     return outList;
@@ -182,12 +178,33 @@ void ScientistRepository::save() {
     scientistFile.close();
 }
 
-Scientist* ScientistRepository::search(std::string searchTerm) {
+//Scientist* ScientistRepository::search(std::string searchTerm) {
+//    // Naive search implementation, finds the case sensitive substring in the name and returns first match
+//    for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++) {
+//        if(iter->name.find(searchTerm) != std::string::npos) {
+//            return new Scientist(*iter);
+//        }
+//    }
+//    return NULL;
+//}
+
+std::list<Scientist> ScientistRepository::search(/*std::string searchTerm*/) {
     // Naive search implementation, finds the case sensitive substring in the name and returns first match
-    for(std::list<Scientist>::iterator iter = scientistList.begin(); iter != scientistList.end(); iter++) {
-        if(iter->name.find(searchTerm) != std::string::npos) {
-            return new Scientist(*iter);
+    std::list<Scientist> scientist = std::list<Scientist>();
+    openDatabase();
+    QSqlQuery query;
+    Scientist s = Scientist();
+    QString searchTerm;
+        query.exec("SELECT * FROM scientists s WHERE s.Name = \'" + searchTerm + "\'");
+
+        while(query.next()){
+            s.name = query.value("Name").toString().toStdString();
+            s.gender = query.value("Gender").toString().toStdString();
+            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            //s.computers = query.value("Computers").toString().toStdString();
+
+            scientist.push_back(s);
         }
-    }
-    return NULL;
+    return scientist;
 }

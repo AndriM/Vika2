@@ -33,8 +33,7 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
     openDatabase();
     QSqlQuery query;
     computer c = computer();
-    if(order == "name")
-    {
+    if(order == "name") {
         query.exec("SELECT * FROM Computers ORDER BY Name");
 
         while(query.next()){
@@ -47,9 +46,7 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             comp.push_back(c);
         }
         return comp;
-    }
-    else if(order == "construction year")
-    {
+    } else if(order == "construction year") {
         query.exec("SELECT * FROM Computers ORDER BY ConstructionYear");
 
         while(query.next()){
@@ -62,9 +59,7 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             comp.push_back(c);
         }
         return comp;
-    }
-    else if(order == "type")
-    {
+    } else if(order == "type") {
         query.exec("SELECT * FROM Computers ORDER BY Type");
 
         while(query.next()){
@@ -77,25 +72,21 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             comp.push_back(c);
         }
         return comp;
+    } else if(order == "constructed") {
+        query.exec("SELECT * FROM Computers ORDER BY Constructed");
+
+        while(query.next()) {
+            c.name = query.value("Name").toString().toStdString();
+            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
+            c.type = query.value("Type").toString().toStdString();
+            c.constructed = query.value("Constructed").toString().toStdString();
+            //s.computers = query.value("Computers").toString().toStdString();
+
+            comp.push_back(c);
+        }
+        return comp;
+    } else {
+        exit(0);
     }
-    else if(order == "constructed")
-        {
-            query.exec("SELECT * FROM Computers ORDER BY Constructed");
-
-            while(query.next()){
-                c.name = query.value("Name").toString().toStdString();
-                c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
-                c.type = query.value("Type").toString().toStdString();
-                c.constructed = query.value("Constructed").toString().toStdString();
-                //s.computers = query.value("Computers").toString().toStdString();
-
-                comp.push_back(c);
-            }
-            return comp;
-        }
-    else
-        {
-            exit(0);
-        }
     return comp;
 }

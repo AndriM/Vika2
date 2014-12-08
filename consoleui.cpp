@@ -78,12 +78,16 @@ int ConsoleUI::respondToMessage() {
                 std::cin.ignore();
                 std::getline(std::cin,searchTerm);
                 clear();
-                Scientist* searchResult = scienceService.search(searchTerm);
-                if(searchResult) {
+                //Scientist* searchResult = scienceService.search(searchTerm);
+                std::list<Scientist> s = scienceService.search(/*searchTerm*/);
+                //if(s) {
                     std::cout << "Scientist found!!" << std::endl;
                     std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\n";
-                    std::cout << searchResult->name << "\t" << searchResult->dateOfBirth << "\t\t" << searchResult->dateOfDeath << "\t\t" << searchResult->gender << "\t\t" << "\t\t" << std::endl;
-                } else {
+                    //std::cout << searchResult->name << "\t" << searchResult->dateOfBirth << "\t\t" << searchResult->dateOfDeath << "\t\t" << searchResult->gender << "\t\t" << "\t\t" << std::endl;
+                    for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
+                    }
+                /*} else*/ {
                     std::cout << "No results found for the term: " << searchTerm << std::endl;
                 }
                 waitForPrompt();

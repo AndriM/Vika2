@@ -1,7 +1,6 @@
 #include "sql.h"
 
-SQL::SQL()
-{
+SQL::SQL() {
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "science_db.sqlite";
