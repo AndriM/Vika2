@@ -122,9 +122,6 @@ int ConsoleUI::respondToMessage() {
                     std::cin >> cID;
 
                     scienceService.connectScientists(sID,cID);
-
-                waitForPrompt();
-                clear();
             } else if(userRequest.find("order") != std::string::npos) {
                 clear();
                 std::string orderby;
