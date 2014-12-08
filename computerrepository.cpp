@@ -87,7 +87,6 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
             c.constructed = query.value("Constructed").toString().toStdString();
-            //s.computers = query.value("Computers").toString().toStdString();
 
             comp.push_back(c);
         }
@@ -103,7 +102,6 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
             c.constructed = query.value("Constructed").toString().toStdString();
-            //s.computers = query.value("Computers").toString().toStdString();
 
             comp.push_back(c);
         }
@@ -118,7 +116,6 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
             c.constructed = query.value("Constructed").toString().toStdString();
-            //s.computers = query.value("Computers").toString().toStdString();
 
             comp.push_back(c);
         }
@@ -132,7 +129,6 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
             c.constructed = query.value("Constructed").toString().toStdString();
-            //s.computers = query.value("Computers").toString().toStdString();
 
             comp.push_back(c);
             }
