@@ -6,9 +6,11 @@
 class ComputerRepository {
 public:
     ComputerRepository();
-    void openDatabase();
+    QSqlDatabase openDatabase();
     void add(computer comp);
     std::list<computer> orderBy(std::string order);
+private:
+    QSqlDatabase computerDB;
 };
 
 #endif // COMPUTERREPOSITORY_H

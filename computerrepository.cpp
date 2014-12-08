@@ -3,17 +3,33 @@
 ComputerRepository::ComputerRepository() {
 }
 
-void ComputerRepository::openDatabase() {
+QSqlDatabase ComputerRepository::openDatabase() {
+
+    QString connectionName = "DatabaseConnection";
+
     QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "science_db.sqlite";
-    db.setDatabaseName(dbName);
-    db.open();
+
+    if(QSqlDatabase::contains("DatabaseConnection"))
+    {
+        db = QSqlDatabase::database("DatabaseConnection");
+    }
+    else
+    {
+        db = QSqlDatabase::addDatabase("QSQLITE", "DatabaseConnection");
+        QString dbName = "science_db.sqlite";
+        db.setDatabaseName(dbName);
+        db.open();
+    }
+    return db;
+
 }
 
 void ComputerRepository::add(computer comp) {
-    openDatabase();
-    QSqlQuery query;
+
+    computerDB = openDatabase();
+    computerDB.open();
+    QSqlQuery query(computerDB);
+
     query.prepare("INSERT INTO Computers (Name, ConstuctionYear, Type, Constructed)"
                   "VALUES(:name, :constructionYear, :type, :constructed)");
     query.bindValue(":name",        QString::fromStdString(comp.name));
@@ -22,6 +38,9 @@ void ComputerRepository::add(computer comp) {
     query.bindValue(":constructed",      QString::fromStdString(comp.constructed));
 
     query.exec();
+
+    computerDB.close();
+
 //     Replace our chosen delimiter with space to avoid breaking the delimited format of the file
 //    std::replace(scientist.name.begin(),scientist.name.end(),delimiter,' ');
 //    scientistList.push_back(scientist);
@@ -30,8 +49,11 @@ void ComputerRepository::add(computer comp) {
 std::list<computer> ComputerRepository::orderBy(std::string order) {
 
     std::list<computer> comp = std::list<computer>();
-    openDatabase();
-    QSqlQuery query;
+
+    computerDB = openDatabase();
+    computerDB.open();
+    QSqlQuery query(computerDB);
+
     computer c = computer();
     if(order == "name") {
         query.exec("SELECT * FROM Computers ORDER BY Name");
@@ -45,6 +67,9 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
         }
+
+        computerDB.close();
+
         return comp;
     } else if(order == "construction year") {
         query.exec("SELECT * FROM Computers ORDER BY ConstructionYear");
@@ -58,6 +83,8 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
         }
+        computerDB.close();
+
         return comp;
     } else if(order == "type") {
         query.exec("SELECT * FROM Computers ORDER BY Type");
@@ -71,6 +98,7 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
         }
+        computerDB.close();
         return comp;
     } else if(order == "constructed") {
         query.exec("SELECT * FROM Computers ORDER BY Constructed");
@@ -84,10 +112,13 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
             }
-            return comp;
+
+        computerDB.close();
+        return comp;
         }
     else
         {
+            computerDB.close();
             exit(0);
         }
 }

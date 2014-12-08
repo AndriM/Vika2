@@ -53,12 +53,6 @@ QSqlDatabase ScientistRepository::openDatabase() {
         db.open();
     }
     return db;
-
-    /*QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "science_db.sqlite";
-    db.setDatabaseName(dbName);
-    db.open();*/
 }
 
 void ScientistRepository::add(Scientist scientist) {
@@ -189,6 +183,7 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         return scientist;
     }
     else {
+        scientistDB.close();
         exit(0);
     }
 }
