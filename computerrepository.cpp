@@ -56,9 +56,9 @@ void ComputerRepository::add(computer comp) {
 
     query.prepare("INSERT INTO Computers (Name, ConstuctionYear, Type, Constructed)"
                   "VALUES(:name, :constructionYear, :type, :constructed)");
-    query.bindValue(":name",        QString::fromStdString(comp.name));
+    query.bindValue(":name",             QString::fromStdString(comp.name));
     query.bindValue(":constructionYear", QString::fromStdString(comp.constructionYear));
-    query.bindValue(":type", QString::fromStdString(comp.type));
+    query.bindValue(":type",             QString::fromStdString(comp.type));
     query.bindValue(":constructed",      QString::fromStdString(comp.constructed));
 
     query.exec();
@@ -83,10 +83,10 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM Computers ORDER BY Name");
 
         while(query.next()){
-            c.name = query.value("Name").toString().toStdString();
-            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
-            c.type = query.value("Type").toString().toStdString();
-            c.constructed = query.value("Constructed").toString().toStdString();
+            c.name              = query.value("Name").toString().toStdString();
+            c.constructionYear  = query.value("ConstuctionYear").toString().toStdString();
+            c.type              = query.value("Type").toString().toStdString();
+            c.constructed       = query.value("Constructed").toString().toStdString();
 
             comp.push_back(c);
         }
@@ -98,10 +98,10 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM Computers ORDER BY ConstructionYear");
 
         while(query.next()){
-            c.name = query.value("Name").toString().toStdString();
-            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
-            c.type = query.value("Type").toString().toStdString();
-            c.constructed = query.value("Constructed").toString().toStdString();
+            c.name              = query.value("Name").toString().toStdString();
+            c.constructionYear  = query.value("ConstuctionYear").toString().toStdString();
+            c.type              = query.value("Type").toString().toStdString();
+            c.constructed       = query.value("Constructed").toString().toStdString();
 
             comp.push_back(c);
         }
@@ -112,10 +112,10 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM Computers ORDER BY Type");
 
         while(query.next()){
-            c.name = query.value("Name").toString().toStdString();
-            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
-            c.type = query.value("Type").toString().toStdString();
-            c.constructed = query.value("Constructed").toString().toStdString();
+            c.name              = query.value("Name").toString().toStdString();
+            c.constructionYear  = query.value("ConstuctionYear").toString().toStdString();
+            c.type              = query.value("Type").toString().toStdString();
+            c.constructed       = query.value("Constructed").toString().toStdString();
 
             comp.push_back(c);
         }
@@ -125,10 +125,10 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM Computers ORDER BY Constructed");
 
         while(query.next()) {
-            c.name = query.value("Name").toString().toStdString();
-            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
-            c.type = query.value("Type").toString().toStdString();
-            c.constructed = query.value("Constructed").toString().toStdString();
+            c.name              = query.value("Name").toString().toStdString();
+            c.constructionYear  = query.value("ConstuctionYear").toString().toStdString();
+            c.type              = query.value("Type").toString().toStdString();
+            c.constructed       = query.value("Constructed").toString().toStdString();
 
             comp.push_back(c);
             }
@@ -154,10 +154,10 @@ std::list<computer> ComputerRepository::search(std::string searchField, std::str
     query.exec("SELECT * FROM Computers s WHERE s.\'" + field + "\' = \'" + term + "\'");
 
         while(query.next()){
-            c.name = query.value("Name").toString().toStdString();
-            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
-            c.type = query.value("Type").toString().toStdString();
-            c.constructed = query.value("Constructed").toString().toStdString();
+            c.name              = query.value("Name").toString().toStdString();
+            c.constructionYear  = query.value("ConstuctionYear").toString().toStdString();
+            c.type              = query.value("Type").toString().toStdString();
+            c.constructed       = query.value("Constructed").toString().toStdString();
 
             comp.push_back(c);
         }

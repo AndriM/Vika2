@@ -84,10 +84,10 @@ std::list<Scientist> ScientistRepository::list() {
     query.exec("SELECT * FROM scientists");
 
     while(query.next()){
-        s.name = query.value("Name").toString().toStdString();
-        s.gender = query.value("Gender").toString().toStdString();
-        s.dateOfBirth = query.value("BirthYear").toString().toStdString();
-        s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+        s.name          = query.value("Name").toString().toStdString();
+        s.gender        = query.value("Gender").toString().toStdString();
+        s.dateOfBirth   = query.value("BirthYear").toString().toStdString();
+        s.dateOfDeath   = query.value("DeathYear").toString().toStdString();
 
         scientist.push_back(s);
     }
@@ -107,10 +107,10 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM scientists ORDER BY Name");
 
         while(query.next()){
-            s.name = query.value("Name").toString().toStdString();
-            s.gender = query.value("Gender").toString().toStdString();
-            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
-            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            s.name          = query.value("Name").toString().toStdString();
+            s.gender        = query.value("Gender").toString().toStdString();
+            s.dateOfBirth   = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath   = query.value("DeathYear").toString().toStdString();
 
             scientist.push_back(s);
         }
@@ -122,10 +122,10 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM scientists ORDER BY BirthYear");
 
         while(query.next()){
-            s.name = query.value("Name").toString().toStdString();
-            s.gender = query.value("Gender").toString().toStdString();
-            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
-            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            s.name          = query.value("Name").toString().toStdString();
+            s.gender        = query.value("Gender").toString().toStdString();
+            s.dateOfBirth   = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath   = query.value("DeathYear").toString().toStdString();
 
             scientist.push_back(s);
         }
@@ -137,10 +137,10 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM scientists ORDER BY DeathYear");
 
         while(query.next()){
-            s.name = query.value("Name").toString().toStdString();
-            s.gender = query.value("Gender").toString().toStdString();
-            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
-            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            s.name          = query.value("Name").toString().toStdString();
+            s.gender        = query.value("Gender").toString().toStdString();
+            s.dateOfBirth   = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath   = query.value("DeathYear").toString().toStdString();
 
             scientist.push_back(s);
        }
@@ -153,10 +153,10 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         query.exec("SELECT * FROM scientists ORDER BY Gender");
 
         while(query.next()){
-            s.name = query.value("Name").toString().toStdString();
-            s.gender = query.value("Gender").toString().toStdString();
-            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
-            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            s.name          = query.value("Name").toString().toStdString();
+            s.gender        = query.value("Gender").toString().toStdString();
+            s.dateOfBirth   = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath   = query.value("DeathYear").toString().toStdString();
 
             scientist.push_back(s);
         }
@@ -181,10 +181,10 @@ std::list<Scientist> ScientistRepository::search(std::string searchField, std::s
     query.exec("SELECT * FROM scientists s WHERE s.\'" + field + "\' = \'" + term + "\'");
 
         while(query.next()){
-            s.name = query.value("Name").toString().toStdString();
-            s.gender = query.value("Gender").toString().toStdString();
-            s.dateOfBirth = query.value("BirthYear").toString().toStdString();
-            s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+            s.name          = query.value("Name").toString().toStdString();
+            s.gender        = query.value("Gender").toString().toStdString();
+            s.dateOfBirth   = query.value("BirthYear").toString().toStdString();
+            s.dateOfDeath   = query.value("DeathYear").toString().toStdString();
             //s.computers = query.value("Computers").toString().toStdString();
 
             scientist.push_back(s);
