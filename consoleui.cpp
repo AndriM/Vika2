@@ -81,8 +81,7 @@ int ConsoleUI::respondToMessage() {
                 std::cout << "Enter what you want to search for: ";
                 std::cin >> searchTerm;
                 clear();
-                //Scientist* searchResult = scienceService.search(searchTerm);
-                std::list<Scientist> s = scienceService.search(searchField, searchTerm);
+                std::list<Scientist> s = scienceService.searchScientists(searchField, searchTerm);
                 unsigned int i = 0;
                     for(;i < s.size(); i++) {
                         i++;
@@ -117,18 +116,6 @@ int ConsoleUI::respondToMessage() {
                     for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
                     }
-
-                /*std::string filterCol = "";
-                std::string filterMod = "";
-                std::cout << FILTER_MENU << std::endl;
-                std::cin >> filterCol >> filterMod;
-                clear();
-                std::list<Scientist> l = scienceService.getScientistsOrderedBy(filterCol,filterMod);
-                std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\n";
-                for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
-                    std::cout << iter->name << "\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
-                }
-                waitForPrompt();*/
             } else if(userRequest.find("display") != std::string::npos) {
                 std::list<Scientist> s = scienceService.getAllScientists();
 
@@ -175,24 +162,28 @@ int ConsoleUI::respondToMessage() {
                 scienceService.addComputer(additionalComputer);
             }
 
-            /*} else if(userRequest.find("search") != std::string::npos) {
+            else if(userRequest.find("search") != std::string::npos) {
                 clear();
+                std::string searchField = "";
                 std::string searchTerm = "";
-                std::cout << "Enter the search term: ";
-                std::cin.ignore();
-                std::getline(std::cin,searchTerm);
+                std::cout << "Enter a search field: ";
+                std::cin >> searchField;
                 clear();
-                computer* searchResult = computerService.search(searchTerm);
-                if(searchResult) {
+                std::cout << "Enter what you want to search for: ";
+                std::cin >> searchTerm;
+                clear();
+                std::list<computer> c = scienceService.searchComputers(searchField, searchTerm);
+                unsigned int i = 0;
+                    for(;i < c.size(); i++) {
+                        i++;
+                    }
+                if(i != 0) {
                     std::cout << "Computer found!!" << std::endl;
-                    std::cout << "Name:\t\tConstruction Year:\tType:\tComputer constructed:\n";
-                    std::cout << searchResult->name << "\t" << searchResult->constructionYear << "\t\t" << searchResult->type << "\t\t" << searchResult->constructed << "\t\t" << std::endl;
-                } else {
-                    std::cout << "No results found for the term: " << searchTerm << std::endl;
+                    std::cout << "Name:\t\tConstruction Year:\tType:\tConstructed:\n";
+                    for(std::list<computer>::iterator iter = c.begin(); iter != c.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
+                    }
                 }
-                waitForPrompt();
-                clear();
-            }*/
                 if(userRequest.find("order") != std::string::npos) {
                 clear();
 
@@ -235,7 +226,7 @@ int ConsoleUI::respondToMessage() {
         return 1;
             }*/
     //}
-                }
+            }}
         std::cout << "Do you want to go again? (y/n): ";
         std::cin >> wantToGoAgain;
     }while(wantToGoAgain == 'Y' || wantToGoAgain =='y');

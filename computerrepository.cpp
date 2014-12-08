@@ -142,3 +142,27 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
             exit(0);
         }
 }
+
+std::list<computer> ComputerRepository::search(std::string searchField, std::string searchTerm) {
+    std::list<computer> comp = std::list<computer>();
+    computerDB = openDatabase();
+    computerDB.open();
+    QSqlQuery query(computerDB);
+    computer c = computer();
+    QString field = QString::fromStdString(searchField);
+    QString term = QString::fromStdString(searchTerm);
+
+    query.exec("SELECT * FROM Computers s WHERE s.\'" + field + "\' = \'" + term + "\'");
+
+        while(query.next()){
+            c.name = query.value("Name").toString().toStdString();
+            c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
+            c.type = query.value("Type").toString().toStdString();
+            c.constructed = query.value("Constructed").toString().toStdString();
+
+            comp.push_back(c);
+        }
+    computerDB.close();
+
+    return comp;
+}

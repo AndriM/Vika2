@@ -10,6 +10,7 @@ public:
     void add(computer comp);
     std::list<computer> orderBy(std::string order);
     std::list<computer> list();
+    std::list<computer> search(std::string searchField, std::string searchTerm);
 private:
     QSqlDatabase computerDB;
 };

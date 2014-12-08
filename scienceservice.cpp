@@ -31,6 +31,9 @@ std::list<computer> ScienceService::getAllComputers() {
     std::list<computer> l = computerRepository.list();
     return l;
 }
-std::list<Scientist> ScienceService::search(std::string searchField, std::string searchTerm) {
+std::list<Scientist> ScienceService::searchScientists(std::string searchField, std::string searchTerm) {
     return scientistRepository.search(searchField, searchTerm);
+}
+std::list<computer> ScienceService::searchComputers(std::string searchField, std::string searchTerm) {
+    return computerRepository.search(searchField, searchTerm);
 }

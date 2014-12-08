@@ -15,12 +15,13 @@ public:
     void addScientist(Scientist scientist);
     // Returns the first scientist that matches the searchTerm
 //    Scientist* search(std::string searchTerm);
-    std::list<Scientist> search(string searchField, string searchTerm);
+    std::list<Scientist> searchScientists(string searchField, string searchTerm);
     std::list<Scientist> getAllScientists();
     void addComputer(computer comp);
     std::list<computer> orderComputers(std::string orderby);
     std::list<Scientist> orderScientists(std::string orderby);
     std::list<computer> getAllComputers();
+    std::list<computer> searchComputers(std::string searchField, std::string searchTerm);
 private:
     ScientistRepository scientistRepository;
     ComputerRepository computerRepository;
