@@ -64,7 +64,6 @@ void ScientistRepository::add(Scientist scientist) {
 std::list<Scientist> ScientistRepository::list() {
 
     std::list<Scientist> scientist = std::list<Scientist>();
-
     openDatabase();
     QSqlQuery query;
     Scientist s = Scientist();
@@ -100,7 +99,6 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
-
         return scientist;
     }
     else if(order == "dob")
@@ -131,11 +129,10 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
        }
-
         return scientist;
     }
     else if(order == "gender")
-        {
+    {
         query.exec("SELECT * FROM scientists ORDER BY Gender");
 
         while(query.next()){
@@ -147,13 +144,12 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
 
             scientist.push_back(s);
         }
-
         return scientist;
-        }
+    }
     else
-        {
+    {
         exit(0);
-        }
+    }
 }
 std::list<Scientist> ScientistRepository::list(std::string col, std::string mod) {
     std::list<Scientist> outList = std::list<Scientist>();

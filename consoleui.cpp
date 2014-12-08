@@ -21,7 +21,6 @@ int ConsoleUI::start() {
             return 0;
         }
     }
-
     return 1;
 }
 
@@ -99,7 +98,6 @@ int ConsoleUI::respondToMessage() {
             l = scienceService.orderScientists(orderby);
 
             std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
-
             for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                 std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
             }
@@ -120,12 +118,9 @@ int ConsoleUI::respondToMessage() {
             std::list<Scientist> s = scienceService.getAllScientists();
 
             std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
-
             for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
                 std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
             }
-
-            //skrifa ut listann
 
         }else if (userRequest.find("exit") != std::string::npos) {
             return 0;
@@ -193,11 +188,9 @@ int ConsoleUI::respondToMessage() {
             l = scienceService.orderComputers(orderby);
 
             std::cout << "Name:\t\tConstruction Year:\tType:\tComputer constructed:\n";
-
             for(std::list<computer>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                 std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
             }
-
 
          /*else if (userRequest.find("exit") != std::string::npos) {
             return 0;
@@ -215,8 +208,8 @@ int ConsoleUI::respondToMessage() {
         }*/
 //}
     }
-    }std::cout << "Do you want to go again (y/n): ";
+    }std::cout << "Do you want to go again? (y/n): ";
     std::cin >> wantToGoAgain;
-}while(wantToGoAgain == 'Y' || wantToGoAgain =='y');
+    }while(wantToGoAgain == 'Y' || wantToGoAgain =='y');
     return 0;
 }

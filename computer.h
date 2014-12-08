@@ -3,8 +3,7 @@
 #include <string>
 using namespace std;
 
-class computer
-{
+class computer {
 public:
     computer();
     string name;

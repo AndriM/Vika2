@@ -3,13 +3,11 @@
 #include "computer.h"
 #include <QtSql>
 
-class ComputerRepository
-{
+class ComputerRepository {
 public:
     ComputerRepository();
     void openDatabase();
     void add(computer comp);
-
     std::list<computer> orderBy(std::string order);
 };
 

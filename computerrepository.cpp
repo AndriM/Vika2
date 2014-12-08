@@ -1,11 +1,9 @@
 #include "computerrepository.h"
 
-ComputerRepository::ComputerRepository()
-{
+ComputerRepository::ComputerRepository() {
 }
 
-void ComputerRepository::openDatabase()
-{
+void ComputerRepository::openDatabase() {
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "science_db.sqlite";
@@ -39,7 +37,7 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
     {
         query.exec("SELECT * FROM Computers ORDER BY Name");
 
-        while(query.next()){ //fer aldrei herna inn!
+        while(query.next()){
             c.name = query.value("Name").toString().toStdString();
             c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
@@ -48,14 +46,13 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
         }
-
         return comp;
     }
     else if(order == "construction year")
     {
         query.exec("SELECT * FROM Computers ORDER BY ConstructionYear");
 
-        while(query.next()){ //fer aldrei herna inn!
+        while(query.next()){
             c.name = query.value("Name").toString().toStdString();
             c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
@@ -64,14 +61,13 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
         }
-
         return comp;
     }
     else if(order == "type")
     {
         query.exec("SELECT * FROM Computers ORDER BY Type");
 
-        while(query.next()){ //fer aldrei herna inn!
+        while(query.next()){
             c.name = query.value("Name").toString().toStdString();
             c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
             c.type = query.value("Type").toString().toStdString();
@@ -80,14 +76,13 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
             comp.push_back(c);
         }
-
         return comp;
     }
     else if(order == "constructed")
         {
             query.exec("SELECT * FROM Computers ORDER BY Constructed");
 
-            while(query.next()){ //fer aldrei herna inn!
+            while(query.next()){
                 c.name = query.value("Name").toString().toStdString();
                 c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
                 c.type = query.value("Type").toString().toStdString();
@@ -96,13 +91,11 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
 
                 comp.push_back(c);
             }
-
             return comp;
         }
     else
         {
             exit(0);
         }
-
     return comp;
 }
