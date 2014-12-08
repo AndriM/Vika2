@@ -79,7 +79,7 @@ int ConsoleUI::respondToMessage() {
                 std::getline(std::cin,searchTerm);
                 clear();
                 //Scientist* searchResult = scienceService.search(searchTerm);
-                std::list<Scientist> s = scienceService.search(/*searchTerm*/);
+                std::list<Scientist> s = scienceService.search(searchTerm);
                 //if(s) {
                     std::cout << "Scientist found!!" << std::endl;
                     std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\n";

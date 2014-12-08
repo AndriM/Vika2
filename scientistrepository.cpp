@@ -188,14 +188,13 @@ void ScientistRepository::save() {
 //    return NULL;
 //}
 
-std::list<Scientist> ScientistRepository::search(/*std::string searchTerm*/) {
-    // Naive search implementation, finds the case sensitive substring in the name and returns first match
+std::list<Scientist> ScientistRepository::search(std::string searchTerm) {
     std::list<Scientist> scientist = std::list<Scientist>();
     openDatabase();
     QSqlQuery query;
     Scientist s = Scientist();
-    QString searchTerm;
-        query.exec("SELECT * FROM scientists s WHERE s.Name = \'" + searchTerm + "\'");
+    QString qstr = QString::fromStdString(searchTerm);
+        query.exec("SELECT * FROM scientists s WHERE s.Name = \'" + qstr + "\'");
 
         while(query.next()){
             s.name = query.value("Name").toString().toStdString();
