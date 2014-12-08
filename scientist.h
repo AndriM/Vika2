@@ -14,6 +14,7 @@ public:
     std::string dateOfBirth;
     std::string dateOfDeath;
     std::string gender;
+    std::string ID;
     //std::string computers;
 };
 

@@ -12,6 +12,7 @@ public:
     std::list<computer> list();
     std::list<computer> search(std::string searchField, std::string searchTerm);
     void connect(int cID, int sID);
+    std::list<computer> listID();
 private:
     QSqlDatabase computerDB;
 };

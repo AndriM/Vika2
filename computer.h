@@ -10,6 +10,7 @@ public:
     string constructionYear;
     string type;
     string constructed;
+    string ID;
 };
 
 #endif // COMPUTER_H

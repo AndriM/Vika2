@@ -5,4 +5,5 @@ computer::computer() {
     constructionYear = "";
     type = "";
     constructed = "";
+    ID = "";
 }

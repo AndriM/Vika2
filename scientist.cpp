@@ -5,6 +5,7 @@ Scientist::Scientist() {
     dateOfBirth = "";
     dateOfDeath = "";
     gender = "";
+    ID = "";
     //computers = "";
 }
 

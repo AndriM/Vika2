@@ -193,3 +193,27 @@ std::list<Scientist> ScientistRepository::search(std::string searchField, std::s
 
     return scientist;
 }
+
+std::list<Scientist> ScientistRepository::listID() {
+    std::list<Scientist> scientist = std::list<Scientist>();
+
+    scientistDB = openDatabase();
+    scientistDB.open();
+    QSqlQuery query(scientistDB);
+
+    Scientist s = Scientist();
+    query.exec("SELECT * FROM scientists");
+
+    while(query.next()){
+        s.name = query.value("Name").toString().toStdString();
+        //s.gender = query.value("Gender").toString().toStdString();
+        //s.dateOfBirth = query.value("BirthYear").toString().toStdString();
+        //s.dateOfDeath = query.value("DeathYear").toString().toStdString();
+        s.ID = query.value("ID").toString().toStdString();
+
+        scientist.push_back(s);
+    }
+    scientistDB.close();
+
+    return scientist;
+}

@@ -166,7 +166,31 @@ std::list<computer> ComputerRepository::search(std::string searchField, std::str
     return comp;
 }
 
-void ComputerRepository::connect(int cID, int sID)
-{
+void ComputerRepository::connect(int cID, int sID) {
     //connecta i toflunum
+}
+
+std::list<computer> ComputerRepository::listID() {
+    std::list<computer> comp = std::list<computer>();
+
+    computerDB = openDatabase();
+    computerDB.open();
+    QSqlQuery query(computerDB);
+
+    computer c = computer();
+    query.exec("SELECT * FROM Computers");
+
+    while(query.next()){
+        c.name = query.value("Name").toString().toStdString();
+        //c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
+        //c.type = query.value("Type").toString().toStdString();
+        //c.constructed = query.value("Constructed").toString().toStdString();
+        c.ID = query.value("ID").toString().toStdString();
+
+        comp.push_back(c);
+    }
+
+    computerDB.close();
+
+    return comp;
 }

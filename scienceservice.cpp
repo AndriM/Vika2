@@ -31,17 +31,27 @@ std::list<computer> ScienceService::getAllComputers() {
     std::list<computer> l = computerRepository.list();
     return l;
 }
+
 std::list<Scientist> ScienceService::searchScientists(std::string searchField, std::string searchTerm) {
     return scientistRepository.search(searchField, searchTerm);
 }
+
 std::list<computer> ScienceService::searchComputers(std::string searchField, std::string searchTerm) {
     return computerRepository.search(searchField, searchTerm);
 }
-void ScienceService::connectScientists(int sID, int cID)
-{
+
+void ScienceService::connectScientists(int sID, int cID) {
     scientistRepository.connect(sID, cID);
 }
-void ScienceService::connectComputers(int cID, int sID)
-{
+
+void ScienceService::connectComputers(int cID, int sID) {
     computerRepository.connect(cID,sID);
+}
+
+std::list<computer> ScienceService::listComputerID() {
+    return computerRepository.listID();
+}
+
+std::list<Scientist> ScienceService::listScientistID() {
+    return scientistRepository.listID();
 }
