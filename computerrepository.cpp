@@ -21,7 +21,31 @@ QSqlDatabase ComputerRepository::openDatabase() {
         db.open();
     }
     return db;
+}
 
+std::list<computer> ComputerRepository::list() {
+
+    std::list<computer> comp = std::list<computer>();
+
+    computerDB = openDatabase();
+    computerDB.open();
+    QSqlQuery query(computerDB);
+
+    computer c = computer();
+    query.exec("SELECT * FROM Computers");
+
+    while(query.next()){
+        c.name = query.value("Name").toString().toStdString();
+        c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
+        c.type = query.value("Type").toString().toStdString();
+        c.constructed = query.value("Constructed").toString().toStdString();
+
+        comp.push_back(c);
+    }
+
+    computerDB.close();
+
+    return comp;
 }
 
 void ComputerRepository::add(computer comp) {

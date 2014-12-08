@@ -197,6 +197,15 @@ int ConsoleUI::respondToMessage() {
                     for(std::list<computer>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
                     }
+                }
+                else if(userRequest.find("display") != std::string::npos) {
+                    std::list<computer> c = scienceService.getAllComputers();
+
+                    std::cout << "Name:\t\t\tConstruction Year:\tType:\tConstructed:\n";
+                        for(std::list<computer>::iterator iter = c.begin(); iter != c.end(); iter ++) {
+                            std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
+                        }
+                }
 
              /*else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
@@ -214,7 +223,7 @@ int ConsoleUI::respondToMessage() {
             }*/
     //}
                 }
-        }std::cout << "Do you want to go again? (y/n): ";
+        std::cout << "Do you want to go again? (y/n): ";
         std::cin >> wantToGoAgain;
     }while(wantToGoAgain == 'Y' || wantToGoAgain =='y');
     return 0;

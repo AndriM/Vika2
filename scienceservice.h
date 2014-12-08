@@ -21,6 +21,7 @@ public:
     void addComputer(computer comp);
     std::list<computer> orderComputers(std::string orderby);
     std::list<Scientist> orderScientists(std::string orderby);
+    std::list<computer> getAllComputers();
 private:
     ScientistRepository scientistRepository;
     ComputerRepository computerRepository;

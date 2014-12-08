@@ -9,6 +9,7 @@ public:
     QSqlDatabase openDatabase();
     void add(computer comp);
     std::list<computer> orderBy(std::string order);
+    std::list<computer> list();
 private:
     QSqlDatabase computerDB;
 };
