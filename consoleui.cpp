@@ -143,10 +143,19 @@ int ConsoleUI::respondToMessage() {
             }
             else if(userRequest.find("dc") != std::string::npos)
             {
-                int sID;
+                int cID;
 
-                std::list<computer> c = scienceService.connectedComputers(sID);
-
+                std::list<Scientist> sciID = scienceService.listScientistID();
+                std::cout << "Name:\t\t\tID:\n";
+                    for(std::list<Scientist>::iterator iter = sciID.begin(); iter != sciID.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->ID << std::endl;
+                    }
+                std::cout << "Show computers connected to scientist nr: ";
+                std::cin >> cID;
+                std::list<computer> c = scienceService.connectedComputers(cID);
+                    for(std::list<computer>::iterator iter = c.begin(); iter != c.end(); iter ++) {
+                        std::cout << iter->name << std::endl;
+                    }
                 //prenta út computer lista
             }
             else if (userRequest.find("exit") != std::string::npos) {

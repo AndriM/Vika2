@@ -27,6 +27,7 @@ public:
     std::list<computer> listComputerID();
     std::list<Scientist> listScientistID();
     std::list<Scientist> connectedScientists(int sID);
+    std::list<computer> connectedComputers(int cID);
 private:
     ScientistRepository scientistRepository;
     ComputerRepository computerRepository;

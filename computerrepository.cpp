@@ -206,7 +206,7 @@ std::list<computer> ComputerRepository::listID() {
     return comp;
 }
 
-std::list<computer> ComputerRepository::connectedComputers(sID)
+std::list<computer> ComputerRepository::connectedComputers(int cID)
 {
     std::list<computer> comp = std::list<computer>();
     computer c = computer();
@@ -214,7 +214,9 @@ std::list<computer> ComputerRepository::connectedComputers(sID)
     computerDB.open();
     QSqlQuery query(computerDB);
 
-    query.exec(QString("SELECT * FROM Computers INNER JOIN Joined j ON Computers.ID = j.c_ID WHERE Joined.s_ID = %1"));
+    //query.exec(QString("SELECT * FROM Computers INNER JOIN Joined j ON Computers.ID = j.c_ID WHERE Joined.s_ID = %1"));
+    //query.exec(QString("SELECT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID union SELECT scientists.* FROM scientists INNER JOIN Joined j on scientists.ID = j.s_ID"));
+    query.exec(QString("SELECT DISTINCT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID"));
 
     while(query.next()){
         c.name                    = query.value("Name").toString().toStdString();

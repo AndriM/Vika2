@@ -9,6 +9,7 @@ std::string MAIN_MENU = "Please use the following commands to interface with thi
         search  : Searches for a scientist\n\
         display : Display scientists.\n\
         connect : Connect scientists and computers. \n\
+        dc      : Display connected.\n\
         exit    : Exit the program";
 
 std::string FILTER_MENU = "Enter one of the following commands to order by the corresponding column\n\
