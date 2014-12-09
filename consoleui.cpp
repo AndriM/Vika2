@@ -4,14 +4,11 @@
 #include "menus.h"
 #include <stdexcept>
 #include <sstream>
-
 ConsoleUI::ConsoleUI() {
     scienceService = ScienceService();
 }
-
 ConsoleUI::~ConsoleUI() {
 }
-
 int ConsoleUI::start() {
     // REPL
     while(true) {
@@ -22,22 +19,17 @@ int ConsoleUI::start() {
     }
     return 1;
 }
-
 void ConsoleUI::clear() {
     // Not pretty, but it is platform independant
     std::cout << std::string( 100, '\n' );
 }
-
 void ConsoleUI::waitForPrompt() {
     std::cout << "\nPress enter to continue..." << std::endl;
     std::cin.ignore();
     std::cin.get();
 }
-
 int ConsoleUI::respondToMessage() {
-
     //std::cout << MAIN_MENU << std::endl;
-
     /*std::string userRequest;
     std::cin >> userRequest;*/
     char wantToGoAgain;
@@ -45,7 +37,6 @@ int ConsoleUI::respondToMessage() {
     do {
         std::cout <<"Choose:\n\t1: Computer scientist.\n\t2: Computer" <<endl;
         std::cin >> answer;
-
         if(answer == 1) {
             std::cout << MAIN_MENU << std::endl;
             std::string userRequest;
@@ -98,7 +89,6 @@ int ConsoleUI::respondToMessage() {
                     std::cout << "No results found for the term: " << searchTerm << std::endl;
                 }
               } else if(userRequest.find("connect") != std::string::npos){
-
                     int sID = 0;
                     int cID = 0;
                     clear();
@@ -119,7 +109,6 @@ int ConsoleUI::respondToMessage() {
                     std::cout <<"Which computer do you want to connect to the scientist?" <<endl;
                     std::cout <<"Enter the Computer ID: ";
                     std::cin >> cID;
-
                     scienceService.connectScientists(sID,cID);
             } else if(userRequest.find("order") != std::string::npos) {
                 clear();
@@ -128,14 +117,12 @@ int ConsoleUI::respondToMessage() {
                 std::cout << FILTER_MENU << std::endl;
                 cin >> orderby;
                 l = scienceService.orderScientists(orderby);
-
                 std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
                     for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
                     }
             } else if(userRequest.find("display") != std::string::npos) {
                 std::list<Scientist> s = scienceService.getAllScientists();
-
                 std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
                     for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
@@ -143,8 +130,7 @@ int ConsoleUI::respondToMessage() {
             }
             else if(userRequest.find("dc") != std::string::npos)
             {
-                int cID;
-
+                int cID = 0;
                 std::list<Scientist> sciID = scienceService.listScientistID();
                 std::cout << "Name:\t\t\tID:\n";
                     for(std::list<Scientist>::iterator iter = sciID.begin(); iter != sciID.end(); iter ++) {
@@ -153,7 +139,9 @@ int ConsoleUI::respondToMessage() {
                 std::cout << "Show computers connected to scientist nr: ";
                 std::cin >> cID;
                 std::list<computer> c = scienceService.connectedComputers(cID);
+
                     for(std::list<computer>::iterator iter = c.begin(); iter != c.end(); iter ++) {
+
                         std::cout << iter->name << std::endl;
                     }
                 //prenta út computer lista
@@ -163,7 +151,6 @@ int ConsoleUI::respondToMessage() {
             } else {
                 throw std::runtime_error( userRequest + " is not a valid command.");
             }
-
            } catch(std::runtime_error e) {
             clear();
             std::cout << "Command caused an error: " << e.what() << std::endl;
@@ -171,7 +158,6 @@ int ConsoleUI::respondToMessage() {
             waitForPrompt();
             clear();
           }
-
 }
         if(answer == 2) { //tarf ad breyta ollu herna ur scientist i computer
             std::cout << MAIN_MENU << std::endl;
@@ -197,7 +183,6 @@ int ConsoleUI::respondToMessage() {
                 clear();
                 scienceService.addComputer(additionalComputer);
             }
-
             else if(userRequest.find("search") != std::string::npos) {
                 clear();
                 std::string searchField = "";
@@ -226,13 +211,11 @@ int ConsoleUI::respondToMessage() {
             }
             else if(userRequest.find("order") != std::string::npos) {
                 clear();
-
                 std::string orderby;
                 std::list<computer> l;
                 std::cout << FILTER_MENU2 << std::endl;
                 cin >> orderby;
                 l = scienceService.orderComputers(orderby);
-
                 std::cout << "Name:\t\tConstruction Year:\tType:\tComputer constructed:\n";
                     for(std::list<computer>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
@@ -240,14 +223,12 @@ int ConsoleUI::respondToMessage() {
                 }
                 else if(userRequest.find("display") != std::string::npos) {
                     std::list<computer> c = scienceService.getAllComputers();
-
                     std::cout << "Name:\t\t\tConstruction Year:\tType:\tConstructed:\n";
                         for(std::list<computer>::iterator iter = c.begin(); iter != c.end(); iter ++) {
                             std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
                         }
                 }
                 else if(userRequest.find("connect") != std::string::npos) {
-
                     int sID = 0;
                     int cID = 0;
                     clear();
@@ -268,21 +249,15 @@ int ConsoleUI::respondToMessage() {
                     std::cout <<"Which scientist do you want to connect to the computer?" <<endl;
                     std::cout <<"Enter the Scientist ID: ";
                     std::cin >> sID;
-
                     scienceService.connectComputers(cID, sID);
                 }
-
             else if(userRequest.find("dc") != std::string::npos)
             {
                 //prenta ut lista til ad velja ur og lata velja ID
-
                 int cID;
-
                 std::list<Scientist> s = scienceService.connectedScientists(cID);
-
                 //prenta út computer lista
             }
-
              else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
             } else {

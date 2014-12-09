@@ -217,13 +217,24 @@ std::list<computer> ComputerRepository::connectedComputers(int cID)
 
     //query.exec(QString("SELECT * FROM Computers INNER JOIN Joined j ON Computers.ID = j.c_ID WHERE Joined.s_ID = %1"));
     //query.exec(QString("SELECT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID union SELECT scientists.* FROM scientists INNER JOIN Joined j on scientists.ID = j.s_ID"));
-    query.exec(QString("SELECT DISTINCT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID"));
+    query.exec(QString("SELECT ID, Name FROM Computers JOIN Joined ON Joined.c_ID = Computers.ID WHERE Joined.s_ID = %1")
+                      .arg(cID));
+
+    //query.exec(QString("SELECT DISTINCT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID"));
+    //query.exec(QString("SELECT ID, Name  FROM scientists JOIN Joined ON Joined.s_ID = scientists.ID WHERE Joined.c_ID = %1 union SELECT ID, Name FROM Computers JOIN Joined ON Joined.c_ID = Computers.ID WHERE Joined.c_ID = %1")
+      //         .arg(cID)
+        //       .arg(cID));
+   // query.exec(QString("SELECT ID, Name, Birthyear, Deathyear, Gender FROM scientists JOIN Joined ON Joined.s_ID = scientists.ID WHERE Joined.c_ID = %1")
+//                      .arg(cID));
+    //query.exec(QString("SELECT Computers.name FROM Computers JOIN Joined ON Computers.ID = Joined.c_ID JOIN scientists ON Joined.s_ID = scientists.ID ORDER BY Computers.name"));
+                     //    .arg(cID));
+
 
     while(query.next()){
         c.name                    = query.value("Name").toString().toStdString();
-        c.constructionYear        = query.value("ConstuctionYear").toString().toStdString();
-        c.type                    = query.value("Type").toString().toStdString();
-        c.constructed             = query.value("Constructed").toString().toStdString();
+    //    c.constructionYear        = query.value("ConstuctionYear").toString().toStdString();
+      //  c.type                    = query.value("Type").toString().toStdString();
+        //c.constructed             = query.value("Constructed").toString().toStdString();
 
         comp.push_back(c);
     }
