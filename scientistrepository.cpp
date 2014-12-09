@@ -49,18 +49,17 @@ QSqlDatabase ScientistRepository::openDatabase() {
 }
 
 void ScientistRepository::connect(int sID, int cID) {
-//    //connecta i toflunum
+   //connecta i toflunum
+        scientistDB = openDatabase();
+        scientistDB.open();
+        QSqlQuery query(scientistDB);
 
-//        QSqlQuery query();
+        query.exec(QString("INSERT INTO Joined (s_ID, c_ID) VALUES (%1,%2);")
+                        .arg(sID)
+                        .arg(cID));
 
-//        query.exec(QString("INSERT INTO Computers(sID, cID) VALUES (%1,%2));
+       scientistDB.close();
 
-//        //.arg(sientists)
-//        //.arg(Computers)
-
-//        scientistDB.close();
-
-//        return scientist;
 }
 
 //std::list<Scientist> ScientistRepository::connected(int cID) {
@@ -73,8 +72,6 @@ void ScientistRepository::connect(int sID, int cID) {
 
 //    return scientist;
 //}
-
-
 void ScientistRepository::add(Scientist scientist) {
 
     scientistDB = openDatabase();
@@ -91,10 +88,6 @@ void ScientistRepository::add(Scientist scientist) {
     query.exec();
     scientistDB.close();
 
-//     Replace our chosen delimiter with space to avoid breaking the delimited format of the file
-//    std::replace(scientist.name.begin(),scientist.name.end(),delimiter,' ');
-//    scientistList.push_back(scientist);
-//    save();
 }
 std::list<Scientist> ScientistRepository::list() {
     std::list<Scientist> scientist = std::list<Scientist>();
