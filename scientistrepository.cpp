@@ -48,32 +48,32 @@ QSqlDatabase ScientistRepository::openDatabase() {
     return db;
 }
 
-void ScientistRepository::connect(int sID, int cID)
-{
-    //connecta i toflunum
+//void ScientistRepository::connect(int sID, int cID)
+//{
+//    //connecta i toflunum
 
-        QSqlQuery query();
+//        QSqlQuery query();
 
-        query.exec(QString("INSERT INTO Computers(sID, cID) VALUES (%1,%2));
+//        query.exec(QString("INSERT INTO Computers(sID, cID) VALUES (%1,%2));
 
-        //.arg(sientists)
-        //.arg(Computers)
+//        //.arg(sientists)
+//        //.arg(Computers)
 
-        scientistDB.close();
+//        scientistDB.close();
 
-        return scientist;
-}
+//        return scientist;
+//}
 
-std::list<Scientist> ScientistRepository::connected(int cID) {
+//std::list<Scientist> ScientistRepository::connected(int cID) {
 
-    QSqlQuery query();
+//    QSqlQuery query();
 
-    query.exec("SELECT * FROM scientists JOIN Computers ON Computers.ID = sientists.ID where Computers.ID = %1");
-    //.arg(cID)
-    scientistDB.close();
+//    query.exec("SELECT * FROM scientists JOIN Computers ON Computers.ID = sientists.ID where Computers.ID = %1");
+//    //.arg(cID)
+//    scientistDB.close();
 
-    return scientist;
-}
+//    return scientist;
+//}
 
 
 void ScientistRepository::add(Scientist scientist) {
