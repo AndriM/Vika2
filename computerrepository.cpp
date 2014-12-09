@@ -205,3 +205,26 @@ std::list<computer> ComputerRepository::listID() {
 
     return comp;
 }
+
+std::list<computer> ComputerRepository::connectedComputers(sID)
+{
+    std::list<computer> comp = std::list<computer>();
+    computer c = computer();
+    computerDB = openDatabase();
+    computerDB.open();
+    QSqlQuery query(computerDB);
+
+    query.exec(QString("SELECT * FROM Computers INNER JOIN Joined j ON Computers.ID = j.c_ID WHERE Joined.s_ID = %1"));
+
+    while(query.next()){
+        c.name                    = query.value("Name").toString().toStdString();
+        c.constructionYear        = query.value("ConstuctionYear").toString().toStdString();
+        c.type                    = query.value("Type").toString().toStdString();
+        c.constructed             = query.value("Constructed").toString().toStdString();
+
+        comp.push_back(c);
+    }
+        computerDB.close();
+
+    return comp;
+}

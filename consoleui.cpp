@@ -145,13 +145,9 @@ int ConsoleUI::respondToMessage() {
             {
                 int sID;
 
-                std::list<Scientist> s = scienceService.connectedScientists(sID);
+                std::list<computer> c = scienceService.connectedComputers(sID);
 
-                std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
-                    for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
-                        std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
-                    }
-
+                //prenta út computer lista
             }
             else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
@@ -219,7 +215,7 @@ int ConsoleUI::respondToMessage() {
                     std::cout << "No results found for the term: " << searchTerm << std::endl;
                 }
             }
-                if(userRequest.find("order") != std::string::npos) {
+            else if(userRequest.find("order") != std::string::npos) {
                 clear();
 
                 std::string orderby;
@@ -266,6 +262,17 @@ int ConsoleUI::respondToMessage() {
 
                     scienceService.connectComputers(cID, sID);
                 }
+
+            else if(userRequest.find("dc") != std::string::npos)
+            {
+                //prenta ut lista til ad velja ur og lata velja ID
+
+                int cID;
+
+                std::list<Scientist> s = scienceService.connectedScientists(cID);
+
+                //prenta út computer lista
+            }
 
              else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
