@@ -213,6 +213,7 @@ std::list<computer> ComputerRepository::connectedComputers(int cID)
     computerDB = openDatabase();
     computerDB.open();
     QSqlQuery query(computerDB);
+    QString c_ID = QString::number(cID);
 
     //query.exec(QString("SELECT * FROM Computers INNER JOIN Joined j ON Computers.ID = j.c_ID WHERE Joined.s_ID = %1"));
     //query.exec(QString("SELECT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID union SELECT scientists.* FROM scientists INNER JOIN Joined j on scientists.ID = j.s_ID"));
