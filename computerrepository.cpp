@@ -168,6 +168,7 @@ std::list<computer> ComputerRepository::search(std::string searchField, std::str
 
 void ComputerRepository::connect(int cID, int sID) {
     //connecta i toflunum
+    //BLALBLALBLABLA
 }
 
 std::list<computer> ComputerRepository::listID() {
