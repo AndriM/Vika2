@@ -140,7 +140,20 @@ int ConsoleUI::respondToMessage() {
                     for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
                     }
-            } else if (userRequest.find("exit") != std::string::npos) {
+            }
+            else if(userRequest.find("dc") != std::string::npos)
+            {
+                int sID;
+
+                std::list<Scientist> s = scienceService.connectedScientists(sID);
+
+                std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
+                    for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
+                    }
+
+            }
+            else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
             } else {
                 throw std::runtime_error( userRequest + " is not a valid command.");

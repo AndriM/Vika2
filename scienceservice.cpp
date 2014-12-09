@@ -47,6 +47,9 @@ void ScienceService::connectScientists(int sID, int cID) {
 void ScienceService::connectComputers(int cID, int sID) {
     computerRepository.connect(cID,sID);
 }
+std::list<Scientist> ScienceService::connectedScientists(int sID) {
+    return scientistRepository.connectedScientists(sID);
+}
 
 std::list<computer> ScienceService::listComputerID() {
     return computerRepository.listID();

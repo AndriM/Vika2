@@ -11,6 +11,7 @@
 #include "comparer.h"
 #include <algorithm>
 #include <QtSql>
+#include <iostream>
 
 // Handles all the things that pertain to persistence
 // uses a file that is located in the build root directory
@@ -28,6 +29,7 @@ public:
     QSqlDatabase openDatabase();
     void connect(int sID, int cID);
     std::list<Scientist> listID();
+    std::list<Scientist> connectedScientists(int cID);
 private:
     // This list is maintained in memory and persisted with ScientistRepository::save()
     std::list<Scientist> scientistList;
