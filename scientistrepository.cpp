@@ -51,22 +51,31 @@ QSqlDatabase ScientistRepository::openDatabase() {
 void ScientistRepository::connect(int sID, int cID)
 {
     //connecta i toflunum
-    std::list<Scientist> ScientistRepository::newlist() {
-        std::list<Scientist> scientist = std::list<Scientist>();
 
-        scientistDB = openDatabase();
-        scientistDB.open();
-        QSqlQuery query(scientistDB);
+        QSqlQuery query();
 
-        Scientist s = Scientist();
-        query.exec("SELECT * FROM scientists on sID = cID where cID = "%1"");
+        query.exec(QString("INSERT INTO Computers(sID, cID) VALUES (%1,%2));
+
+        //.arg(sientists)
+        //.arg(Computers)
 
         scientistDB.close();
 
         return scientist;
-
-
 }
+
+std::list<Scientist> ScientistRepository::connected(int cID) {
+
+    QSqlQuery query();
+
+    query.exec("SELECT * FROM scientists JOIN Computers ON Computers.ID = sientists.ID where Computers.ID = %1");
+    //.arg(cID)
+    scientistDB.close();
+
+    return scientist;
+}
+
+
 void ScientistRepository::add(Scientist scientist) {
 
     scientistDB = openDatabase();
