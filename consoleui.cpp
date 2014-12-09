@@ -45,7 +45,7 @@ int ConsoleUI::respondToMessage() {
             std::cin >> userRequest;
         try {
             // Handle all available commands and throw error on unknown ones
-            if(userRequest.find("add") != std::string::npos) { //baeta við hvort vid viljum adda scientist eda computer
+            if(userRequest.find("add") != std::string::npos) {
                 clear();
                 Scientist additionalScientist = Scientist();
                 std::cout << "Enter the name of the scientist: ";
@@ -62,7 +62,8 @@ int ConsoleUI::respondToMessage() {
                 std::cin >> additionalScientist.gender;
                 clear();
                 scienceService.addScientist(additionalScientist);
-            } else if(userRequest.find("search") != std::string::npos) {
+            }
+            else if(userRequest.find("search") != std::string::npos) {
                 clear();
                 std::string searchField = "";
                 std::string searchTerm = "";
@@ -80,37 +81,38 @@ int ConsoleUI::respondToMessage() {
                 if(i != 0) {
                     std::cout << "Scientist found!!" << std::endl;
                     std::cout << "Name:\t\tDateOfBirth:\tDateOfDeath:\tGender:\n";
-                    //std::cout << searchResult->name << "\t" << searchResult->dateOfBirth << "\t\t" << searchResult->dateOfDeath << "\t\t" << searchResult->gender << "\t\t" << "\t\t" << std::endl;
                     for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
                     }
                 }
                 else {
                     std::cout << "No results found for the term: " << searchTerm << std::endl;
-                }
-              } else if(userRequest.find("connect") != std::string::npos){
-                    int sID = 0;
-                    int cID = 0;
-                    clear();
-                    std::list<Scientist> sciID = scienceService.listScientistID();
-                    std::cout << "Name:\t\t\tID:\n";
-                        for(std::list<Scientist>::iterator iter = sciID.begin(); iter != sciID.end(); iter ++) {
-                            std::cout << iter->name << "\t\t" << iter->ID << std::endl;
-                        }
-                    std::cout <<"Which scientist do you want to connect a computer to?" <<endl;
-                    std::cout <<"Enter the Scientist ID: ";
-                    std::cin >> sID;
-                    clear();
-                    std::list<computer> compID = scienceService.listComputerID();
-                    std::cout << "Name:\t\t\tID:\n";
-                        for(std::list<computer>::iterator iter = compID.begin(); iter != compID.end(); iter ++) {
-                            std::cout << iter->name << "\t\t" << iter->ID << std::endl;
-                        }
-                    std::cout <<"Which computer do you want to connect to the scientist?" <<endl;
-                    std::cout <<"Enter the Computer ID: ";
-                    std::cin >> cID;
-                    scienceService.connectScientists(sID,cID);
-            } else if(userRequest.find("order") != std::string::npos) {
+                  }
+            }
+            else if(userRequest.find("connect") != std::string::npos){
+                int sID = 0;
+                int cID = 0;
+                clear();
+                std::list<Scientist> sciID = scienceService.listScientistID();
+                std::cout << "Name:\t\t\tID:\n";
+                    for(std::list<Scientist>::iterator iter = sciID.begin(); iter != sciID.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->ID << std::endl;
+                    }
+                std::cout <<"Which scientist do you want to connect a computer to?" <<endl;
+                std::cout <<"Enter the Scientist ID: ";
+                std::cin >> sID;
+                clear();
+                std::list<computer> compID = scienceService.listComputerID();
+                std::cout << "Name:\t\t\tID:\n";
+                    for(std::list<computer>::iterator iter = compID.begin(); iter != compID.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->ID << std::endl;
+                    }
+                std::cout <<"Which computer do you want to connect to the scientist?" <<endl;
+                std::cout <<"Enter the Computer ID: ";
+                std::cin >> cID;
+                scienceService.connectScientists(sID,cID);
+            }
+            else if(userRequest.find("order") != std::string::npos) {
                 clear();
                 std::string orderby;
                 std::list<Scientist> l;
@@ -121,15 +123,15 @@ int ConsoleUI::respondToMessage() {
                     for(std::list<Scientist>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
                     }
-            } else if(userRequest.find("display") != std::string::npos) {
+            }
+            else if(userRequest.find("display") != std::string::npos) {
                 std::list<Scientist> s = scienceService.getAllScientists();
                 std::cout << "Name:\t\t\tDate Of Birth:\tDate Of Death:\tGender:\n";
                     for(std::list<Scientist>::iterator iter = s.begin(); iter != s.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
                     }
             }
-            else if(userRequest.find("dc") != std::string::npos)
-            {
+            else if(userRequest.find("dc") != std::string::npos) {
                 int cID = 0;
                 std::list<Scientist> sciID = scienceService.listScientistID();
                 std::cout << "Name:\t\t\tID:\n";
@@ -139,15 +141,14 @@ int ConsoleUI::respondToMessage() {
                 std::cout << "Show computers connected to scientist nr: ";
                 std::cin >> cID;
                 std::list<computer> c = scienceService.connectedComputers(cID);
-
                     for(std::list<computer>::iterator iter = c.begin(); iter != c.end(); iter ++) {
-
                         std::cout << iter->name << std::endl;
                     }
             }
             else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
-            } else {
+            }
+            else {
                 throw std::runtime_error( userRequest + " is not a valid command.");
             }
            } catch(std::runtime_error e) {
@@ -219,39 +220,38 @@ int ConsoleUI::respondToMessage() {
                     for(std::list<computer>::iterator iter = l.begin(); iter != l.end(); iter ++) {
                         std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
                     }
-                }
-                else if(userRequest.find("display") != std::string::npos) {
-                    std::list<computer> c = scienceService.getAllComputers();
-                    std::cout << "Name:\t\t\tConstruction Year:\tType:\tConstructed:\n";
-                        for(std::list<computer>::iterator iter = c.begin(); iter != c.end(); iter ++) {
-                            std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
-                        }
-                }
-                else if(userRequest.find("connect") != std::string::npos) {
-                    int sID = 0;
-                    int cID = 0;
-                    clear();
-                    std::list<computer> compID = scienceService.listComputerID();
-                    std::cout << "Name:\t\t\tID:\n";
-                        for(std::list<computer>::iterator iter = compID.begin(); iter != compID.end(); iter ++) {
-                            std::cout << iter->name << "\t\t" << iter->ID << std::endl;
-                        }
-                    std::cout <<"Which computer do you want to connect to a scientist?" <<endl;
-                    std::cout <<"Enter the Computer ID: ";
-                    std::cin >> cID;
-                    clear();
-                    std::list<Scientist> sciID = scienceService.listScientistID();
-                    std::cout << "Name:\t\t\tID:\n";
-                        for(std::list<Scientist>::iterator iter = sciID.begin(); iter != sciID.end(); iter ++) {
-                            std::cout << iter->name << "\t\t" << iter->ID << std::endl;
-                        }
-                    std::cout <<"Which scientist do you want to connect to the computer?" <<endl;
-                    std::cout <<"Enter the Scientist ID: ";
-                    std::cin >> sID;
-                    scienceService.connectComputers(cID, sID);
-                }
-            else if(userRequest.find("dc") != std::string::npos)
-            {
+            }
+            else if(userRequest.find("display") != std::string::npos) {
+                std::list<computer> c = scienceService.getAllComputers();
+                std::cout << "Name:\t\t\tConstruction Year:\tType:\tConstructed:\n";
+                    for(std::list<computer>::iterator iter = c.begin(); iter != c.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->constructionYear << "\t\t" << iter->type << "\t\t" << iter->constructed << std::endl;
+                    }
+            }
+            else if(userRequest.find("connect") != std::string::npos) {
+                int sID = 0;
+                int cID = 0;
+                clear();
+                std::list<computer> compID = scienceService.listComputerID();
+                std::cout << "Name:\t\t\tID:\n";
+                    for(std::list<computer>::iterator iter = compID.begin(); iter != compID.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->ID << std::endl;
+                    }
+                std::cout <<"Which computer do you want to connect to a scientist?" <<endl;
+                std::cout <<"Enter the Computer ID: ";
+                std::cin >> cID;
+                clear();
+                std::list<Scientist> sciID = scienceService.listScientistID();
+                std::cout << "Name:\t\t\tID:\n";
+                    for(std::list<Scientist>::iterator iter = sciID.begin(); iter != sciID.end(); iter ++) {
+                        std::cout << iter->name << "\t\t" << iter->ID << std::endl;
+                    }
+                std::cout <<"Which scientist do you want to connect to the computer?" <<endl;
+                std::cout <<"Enter the Scientist ID: ";
+                std::cin >> sID;
+                scienceService.connectComputers(cID, sID);
+            }
+            else if(userRequest.find("dc") != std::string::npos) {
                 int sID;
 
                 std::list<computer> comp = scienceService.listComputerID();
@@ -266,9 +266,10 @@ int ConsoleUI::respondToMessage() {
                         std::cout << iter->name << std::endl;
                     }
             }
-             else if (userRequest.find("exit") != std::string::npos) {
+            else if (userRequest.find("exit") != std::string::npos) {
                 return 0;
-            } else {
+            }
+            else {
                 throw std::runtime_error( userRequest + " is not a valid command.");
             }
             } catch(std::runtime_error e) {

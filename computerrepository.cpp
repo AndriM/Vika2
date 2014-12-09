@@ -6,7 +6,6 @@ ComputerRepository::ComputerRepository() {
 QSqlDatabase ComputerRepository::openDatabase() {
 
     QString connectionName = "DatabaseConnection";
-
     QSqlDatabase db;
 
     if(QSqlDatabase::contains("DatabaseConnection"))

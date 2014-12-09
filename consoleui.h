@@ -13,6 +13,7 @@ public:
     ConsoleUI();
     ~ConsoleUI();
     int start();
+    void addScientist();
 private:
     ScienceService scienceService;
     void clear();
