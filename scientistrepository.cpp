@@ -107,6 +107,8 @@ void ScientistRepository::add(Scientist scientist) {
 
 std::list<Scientist> ScientistRepository::list() {
 
+    //tetta fall saekir gogn ur toflunni fyrir visindamenn ur gagnagrunninum og setur thau i lista
+
     std::list<Scientist> scientist = std::list<Scientist>();
 
     scientistDB = openDatabase();

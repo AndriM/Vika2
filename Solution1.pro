@@ -16,7 +16,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    comparer.cpp \
     consoleui.cpp \
     scienceservice.cpp \
     scientist.cpp \
@@ -26,7 +25,6 @@ SOURCES += main.cpp \
     computerrepository.cpp
 
 HEADERS += \
-    comparer.h \
     consoleui.h \
     menus.h \
     scienceservice.h \

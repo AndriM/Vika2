@@ -8,7 +8,7 @@ QSqlDatabase ComputerRepository::openDatabase() {
     QString connectionName = "DatabaseConnection";
     QSqlDatabase db;
 
-    if(QSqlDatabase::contains("DatabaseConnection"))
+    if(QSqlDatabase::contains("DatabaseConnection")) //ef gagnagrunnurinn er nu tegar opinn tha viljum vid ekki opna hann aftur aftvi ad ta gaetum vid fengid duplicate connection.
     {
         db = QSqlDatabase::database("DatabaseConnection");
     }
@@ -24,6 +24,7 @@ QSqlDatabase ComputerRepository::openDatabase() {
 
 std::list<computer> ComputerRepository::list() {
 
+    //tetta fall saekir gogn ur toflunni fyrir tolvur ur gagnagrunninum og setur thau i lista
     std::list<computer> comp = std::list<computer>();
 
     computerDB = openDatabase();
