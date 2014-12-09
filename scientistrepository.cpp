@@ -1,6 +1,7 @@
 #include "scientistrepository.h"
 
 ScientistRepository::ScientistRepository(std::string fname) {
+
     filename = fname;
     delimiter = '\t';
     std::ifstream scientistFile;
@@ -30,9 +31,12 @@ ScientistRepository::ScientistRepository(std::string fname) {
         scientistFile.close();
     }
 }
+
 ScientistRepository::~ScientistRepository() {
 }
+
 QSqlDatabase ScientistRepository::openDatabase() {
+
     QString connectionName = "DatabaseConnection";
     QSqlDatabase db;
 
@@ -49,7 +53,7 @@ QSqlDatabase ScientistRepository::openDatabase() {
 }
 
 void ScientistRepository::connect(int sID, int cID) {
-   //connecta i toflunum
+
         scientistDB = openDatabase();
         scientistDB.open();
         QSqlQuery query(scientistDB);
@@ -61,7 +65,6 @@ void ScientistRepository::connect(int sID, int cID) {
        scientistDB.close();
 }
 
-
 std::list<Scientist> ScientistRepository::connectedScientists(int sID) {
 
     std::list<Scientist> scientist = std::list<Scientist>();
@@ -69,17 +72,13 @@ std::list<Scientist> ScientistRepository::connectedScientists(int sID) {
     scientistDB = openDatabase();
     scientistDB.open();
     QSqlQuery query(scientistDB);
+    QString s_ID = QString::number(sID);
 
-    //query.exec(QString("SELECT scientists.* FROM scientists INNER JOIN Joined j on (%1) = j.s_ID union all SELECT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID")
-                        //.arg(sID));
-
-    query.exec(QString("SELECT scientists.* FROM scientists INNER JOIN Joined j on scientists.ID = j.s_ID union all SELECT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID"));
+    query.exec(QString("SELECT ID, Name FROM scientists JOIN Joined ON Joined.s_ID = scientists.ID WHERE Joined.c_ID = %1")
+                      .arg(sID));
 
     while(query.next()){
-        s.name          = query.value("Name").toString().toStdString();
-        s.gender        = query.value("Gender").toString().toStdString();
-        s.dateOfBirth   = query.value("BirthYear").toString().toStdString();
-        s.dateOfDeath   = query.value("DeathYear").toString().toStdString();
+        s.name                    = query.value("Name").toString().toStdString();
 
         scientist.push_back(s);
     }
@@ -87,6 +86,7 @@ std::list<Scientist> ScientistRepository::connectedScientists(int sID) {
 
     return scientist;
 }
+
 void ScientistRepository::add(Scientist scientist) {
 
     scientistDB = openDatabase();
@@ -104,7 +104,9 @@ void ScientistRepository::add(Scientist scientist) {
     scientistDB.close();
 
 }
+
 std::list<Scientist> ScientistRepository::list() {
+
     std::list<Scientist> scientist = std::list<Scientist>();
 
     scientistDB = openDatabase();
@@ -126,7 +128,9 @@ std::list<Scientist> ScientistRepository::list() {
 
     return scientist;
 }
+
 std::list<Scientist> ScientistRepository::orderBy(std::string order) {
+
     std::list<Scientist> scientist = std::list<Scientist>();
 
     scientistDB = openDatabase();
@@ -201,7 +205,9 @@ std::list<Scientist> ScientistRepository::orderBy(std::string order) {
         exit(0);
     }
 }
+
 std::list<Scientist> ScientistRepository::search(std::string searchField, std::string searchTerm) {
+
     std::list<Scientist> scientist = std::list<Scientist>();
     scientistDB = openDatabase();
     scientistDB.open();
@@ -217,7 +223,6 @@ std::list<Scientist> ScientistRepository::search(std::string searchField, std::s
             s.gender        = query.value("Gender").toString().toStdString();
             s.dateOfBirth   = query.value("BirthYear").toString().toStdString();
             s.dateOfDeath   = query.value("DeathYear").toString().toStdString();
-            //s.computers = query.value("Computers").toString().toStdString();
 
             scientist.push_back(s);
         }
@@ -227,6 +232,7 @@ std::list<Scientist> ScientistRepository::search(std::string searchField, std::s
 }
 
 std::list<Scientist> ScientistRepository::listID() {
+
     std::list<Scientist> scientist = std::list<Scientist>();
 
     scientistDB = openDatabase();
@@ -238,9 +244,6 @@ std::list<Scientist> ScientistRepository::listID() {
 
     while(query.next()){
         s.name = query.value("Name").toString().toStdString();
-        //s.gender = query.value("Gender").toString().toStdString();
-        //s.dateOfBirth = query.value("BirthYear").toString().toStdString();
-        //s.dateOfDeath = query.value("DeathYear").toString().toStdString();
         s.ID = query.value("ID").toString().toStdString();
 
         scientist.push_back(s);

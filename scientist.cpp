@@ -6,7 +6,6 @@ Scientist::Scientist() {
     dateOfDeath = "";
     gender = "";
     ID = "";
-    //computers = "";
 }
 
 bool Scientist::operator==(const Scientist& right) {

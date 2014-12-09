@@ -6,7 +6,6 @@
 #include <stack>
 #include <list>
 #include "scienceservice.h"
-//#include "computerservice.h"
 
 // Display layer for the console application
 class ConsoleUI {
@@ -16,7 +15,6 @@ public:
     int start();
 private:
     ScienceService scienceService;
-    //ComputerService computerService;
     void clear();
     void waitForPrompt();
     int respondToMessage();

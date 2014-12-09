@@ -64,12 +64,8 @@ void ComputerRepository::add(computer comp) {
     query.exec();
 
     computerDB.close();
-
-//     Replace our chosen delimiter with space to avoid breaking the delimited format of the file
-//    std::replace(scientist.name.begin(),scientist.name.end(),delimiter,' ');
-//    scientistList.push_back(scientist);
-//    save();
 }
+
 std::list<computer> ComputerRepository::orderBy(std::string order) {
 
     std::list<computer> comp = std::list<computer>();
@@ -136,13 +132,14 @@ std::list<computer> ComputerRepository::orderBy(std::string order) {
         computerDB.close();
         return comp;
         }
-    else
-        {
+       else {
             computerDB.close();
             exit(0);
-        }
+       }
 }
+
 std::list<computer> ComputerRepository::search(std::string searchField, std::string searchTerm) {
+
     std::list<computer> comp = std::list<computer>();
     computerDB = openDatabase();
     computerDB.open();
@@ -177,11 +174,11 @@ void ComputerRepository::connect(int cID, int sID) {
                             .arg(sID));
 
            computerDB.close();
-
-    }
+}
 
 
 std::list<computer> ComputerRepository::listID() {
+
     std::list<computer> comp = std::list<computer>();
 
     computerDB = openDatabase();
@@ -193,9 +190,6 @@ std::list<computer> ComputerRepository::listID() {
 
     while(query.next()){
         c.name = query.value("Name").toString().toStdString();
-        //c.constructionYear = query.value("ConstuctionYear").toString().toStdString();
-        //c.type = query.value("Type").toString().toStdString();
-        //c.constructed = query.value("Constructed").toString().toStdString();
         c.ID = query.value("ID").toString().toStdString();
 
         comp.push_back(c);
@@ -206,8 +200,8 @@ std::list<computer> ComputerRepository::listID() {
     return comp;
 }
 
-std::list<computer> ComputerRepository::connectedComputers(int cID)
-{
+std::list<computer> ComputerRepository::connectedComputers(int cID) {
+
     std::list<computer> comp = std::list<computer>();
     computer c = computer();
     computerDB = openDatabase();
@@ -215,26 +209,11 @@ std::list<computer> ComputerRepository::connectedComputers(int cID)
     QSqlQuery query(computerDB);
     QString c_ID = QString::number(cID);
 
-    //query.exec(QString("SELECT * FROM Computers INNER JOIN Joined j ON Computers.ID = j.c_ID WHERE Joined.s_ID = %1"));
-    //query.exec(QString("SELECT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID union SELECT scientists.* FROM scientists INNER JOIN Joined j on scientists.ID = j.s_ID"));
     query.exec(QString("SELECT ID, Name FROM Computers JOIN Joined ON Joined.c_ID = Computers.ID WHERE Joined.s_ID = %1")
                       .arg(cID));
 
-    //query.exec(QString("SELECT DISTINCT Computers.* FROM Computers INNER JOIN Joined j on Computers.ID = j.c_ID"));
-    //query.exec(QString("SELECT ID, Name  FROM scientists JOIN Joined ON Joined.s_ID = scientists.ID WHERE Joined.c_ID = %1 union SELECT ID, Name FROM Computers JOIN Joined ON Joined.c_ID = Computers.ID WHERE Joined.c_ID = %1")
-      //         .arg(cID)
-        //       .arg(cID));
-   // query.exec(QString("SELECT ID, Name, Birthyear, Deathyear, Gender FROM scientists JOIN Joined ON Joined.s_ID = scientists.ID WHERE Joined.c_ID = %1")
-//                      .arg(cID));
-    //query.exec(QString("SELECT Computers.name FROM Computers JOIN Joined ON Computers.ID = Joined.c_ID JOIN scientists ON Joined.s_ID = scientists.ID ORDER BY Computers.name"));
-                     //    .arg(cID));
-
-
     while(query.next()){
         c.name                    = query.value("Name").toString().toStdString();
-    //    c.constructionYear        = query.value("ConstuctionYear").toString().toStdString();
-      //  c.type                    = query.value("Type").toString().toStdString();
-        //c.constructed             = query.value("Constructed").toString().toStdString();
 
         comp.push_back(c);
     }
