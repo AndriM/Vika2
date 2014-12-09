@@ -48,8 +48,7 @@ QSqlDatabase ScientistRepository::openDatabase() {
     return db;
 }
 
-//void ScientistRepository::connect(int sID, int cID)
-//{
+void ScientistRepository::connect(int sID, int cID) {
 //    //connecta i toflunum
 
 //        QSqlQuery query();
@@ -62,7 +61,7 @@ QSqlDatabase ScientistRepository::openDatabase() {
 //        scientistDB.close();
 
 //        return scientist;
-//}
+}
 
 //std::list<Scientist> ScientistRepository::connected(int cID) {
 
