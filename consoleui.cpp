@@ -94,7 +94,6 @@ int ConsoleUI::respondToMessage() {
                         std::cout << iter->name << "\t\t" << iter->dateOfBirth << "\t\t" << iter->dateOfDeath << "\t\t" << iter->gender << std::endl;
                     }
                 }
-
                 else {
                     std::cout << "No results found for the term: " << searchTerm << std::endl;
                 }

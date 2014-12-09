@@ -167,22 +167,19 @@ std::list<computer> ComputerRepository::search(std::string searchField, std::str
 }
 
 void ComputerRepository::connect(int cID, int sID) {
-//    //connecta i toflunum
-//    computerDB = openDatabase();
-//    computerDB.open();
-//    QSqlQuery query(computerDB);
-//    query.prepare("INSERT INTO Joined(c_ID, s_ID)"
-//    //query.prepare("SELECT c.ID, j.c_ID AS 'ComputerID', j.s_ID AS 'ScientistID' FROM Computers p INNER JOIN Joined j ON j.c_ID = c.ID"
-//                  "VALUES(:cID, :sID)");
-//    query.bindValue(":cID",   QString::fromStdString(comp.ID));
-//    query.bindValue(":sID",   QString::fromStdString(comp.constructionYear));
-//    //query.bindValue(":type", QString::fromStdString(comp.type));
-//    //query.bindValue(":constructed",      QString::fromStdString(comp.constructed));
 
-//    query.exec();
+            computerDB = openDatabase();
+            computerDB.open();
+            QSqlQuery query(computerDB);
 
-//    computerDB.close();
-}
+            query.exec(QString("INSERT INTO Joined (c_ID, s_ID) VALUES (%1,%2);")
+                            .arg(cID)
+                            .arg(sID));
+
+           computerDB.close();
+
+    }
+
 
 std::list<computer> ComputerRepository::listID() {
     std::list<computer> comp = std::list<computer>();
